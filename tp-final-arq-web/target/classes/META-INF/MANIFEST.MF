@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: tp-final-arq-web
+Implementation-Title: TP4_Integrador_v1
 Implementation-Version: 0.0.1-SNAPSHOT
 Build-Jdk-Spec: 1.8
 Created-By: Maven Integration for Eclipse
