@@ -1,14 +1,27 @@
-package com.entities;
+package com.tudai.entities;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+import lombok.Data;
+
+@Entity
+@Data
 public class PlanVuelo extends Plan{
 
+	@Column
 	private int numVuelo;
+	@Column
 	private String compania;
+	@Column
 	private int tiempoEscalaMin;
+	@Column
 	private String tipoAvion;
+	@Column
 	private String aeropuestoSalida;
+	@Column
 	private String aeropuestoLlegada;
 	
 	public PlanVuelo() {
