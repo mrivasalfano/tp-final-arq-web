@@ -17,55 +17,56 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tudai.entities.Usuario;
-import com.tudai.repositories.UsuarioRepository;
+import com.tudai.entities.Plan;
+import com.tudai.repositories.PlanRepository;
 
 @RestController
-@RequestMapping("/usuarios")
-public class UsuarioController extends Controller {
+@RequestMapping("/planes")
+public class PlanController extends Controller {
 
-    @Qualifier("usuarioRepository")
+    @Qualifier("planRepository")
     @Autowired
-    private final UsuarioRepository repository;
+    private final PlanRepository repository;
 
-    public UsuarioController(@Qualifier("usuarioRepository") UsuarioRepository repository) {
+    public PlanController(@Qualifier("planRepository") PlanRepository repository) {
         this.repository = repository;
     }
     
     @GetMapping("/")
-    public Iterable<Usuario> getUsuario() {
+    public Iterable<Plan> getPlan() {
     	return repository.findAll();
     }
     
     @GetMapping("/{id}")
-    public Optional<Usuario> getUsuario(@PathVariable int id) {
+    public Optional<Plan> getPlan(@PathVariable int id) {
     	return repository.findById(id);
     }
         
     @PostMapping("/")
-    public Usuario newUsuario(@RequestBody Usuario u) {
+    public Plan newPlan(@RequestBody Plan u) {
         return repository.save(u);
     }
     
     @PutMapping("/{id}")
-    Usuario replaceUsuario(@RequestBody Usuario newUsuario, @PathVariable Integer id,HttpServletResponse response) {
+    Plan replacePlan(@RequestBody Plan newPlan, @PathVariable Integer id,HttpServletResponse response) {
 
-    	//Optional<Usuario> usuario = repository.findById(id);
-    	//if( usuario.isPresent() ) {
-    	//	usuario.get().setNombre(newUsuario.getNombre());
-    	//	return repository.save(usuario.get());    		
-    	//}
-    	
-    	//this.responseStatus(404,response);
-    	
+    	Optional<Plan> plan = repository.findById(id);
+//    	if( plan.isPresent() ) {
+//        		plan.get().setNombre(newPlan.getNombre());
+//        		plan.get().setFechaInicio(newPlan.getFechaInicio());
+//        		plan.get().setFechaFin(newPlan.getFechaFin());
+//        		plan.get().setCodigoReserva(newPlan.getCodigoReserva());
+//        		return repository.save(plan.get());        		
+//        }    	
+//        this.responseStatus(404,response);    	
         return null;
     }
     
 
     @DeleteMapping("/{id}")
-    void deleteUsuario(@PathVariable Integer id,HttpServletResponse response) {
-    	Optional<Usuario> usuario = repository.findById(id);
-    	if( usuario.isPresent() ) {
+    void deletePlan(@PathVariable Integer id,HttpServletResponse response) {
+    	Optional<Plan> plan = repository.findById(id);
+    	if( plan.isPresent() ) {
     		repository.deleteById(id);  
     		this.responseStatus(200,response);
     	}
