@@ -20,9 +20,9 @@ public class PlanVuelo extends Plan{
 	@Column
 	private String tipoAvion;
 	@Column
-	private String aeropuestoSalida;
+	private String aeropuertoSalida;
 	@Column
-	private String aeropuestoLlegada;
+	private String aeropuertoLlegada;
 	
 	public PlanVuelo() {
 		super();
@@ -35,8 +35,8 @@ public class PlanVuelo extends Plan{
 		this.compania = compania;
 		this.tiempoEscalaMin = tiempoEscalaMin;
 		this.tipoAvion = tipoAvion;
-		this.aeropuestoSalida = aeropuestoSalida;
-		this.aeropuestoLlegada = aeropuestoLlegada;
+		this.aeropuertoSalida = aeropuestoSalida;
+		this.aeropuertoLlegada = aeropuestoLlegada;
 	}
 	
 	
