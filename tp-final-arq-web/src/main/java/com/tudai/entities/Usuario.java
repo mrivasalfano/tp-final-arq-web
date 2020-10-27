@@ -18,15 +18,15 @@ public class Usuario {
 	@Column
 	private String nombre;
 	@Column
-	private String contraseña; 
+	private String clave; 
 	
 	public Usuario() {
 		
 	}
 	
-	public Usuario(String nombre, String contraseña){
+	public Usuario(String nombre, String clave){
 		this.nombre = nombre;
-		this.contraseña = contraseña;
+		this.clave = clave;
 	}
 	
 }

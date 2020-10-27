@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,16 @@ public class PlanController extends Controller {
     @GetMapping("/{id}")
     public Optional<Plan> getPlan(@PathVariable int id) {
     	return repository.findById(id);
+    }
+    
+    @PostMapping("/")
+    public Plan newPlan(@RequestBody Plan p) {
+        return repository.save(p);
+    }
+    
+    @PostMapping("/vuelos")
+    public Plan newPlanVuelo(@RequestBody PlanVuelo pv) {
+        return repository.save(pv);
     }
     
     @PutMapping("/vuelos/{id}")

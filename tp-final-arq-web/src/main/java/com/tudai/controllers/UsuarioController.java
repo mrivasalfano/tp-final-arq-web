@@ -58,19 +58,24 @@ public class UsuarioController extends Controller {
         
     @PostMapping("/")
     public Usuario newUsuario(@RequestBody Usuario u) {
-    	return repository.save(u);
+    	Usuario usu = repository.findByName(u.getNombre());
+    	if(usu != null) {
+    		return null;
+    	}
+    	return repository.save(u);    		
     }
     
     @PutMapping("/{id}")
     Usuario replaceUsuario(@RequestBody Usuario newUsuario, @PathVariable Integer id,HttpServletResponse response) {
 
-    	//Optional<Usuario> usuario = repository.findById(id);
-    	//if( usuario.isPresent() ) {
-    	//	usuario.get().setNombre(newUsuario.getNombre());
-    	//	return repository.save(usuario.get());    		
-    	//}
+    	Optional<Usuario> usuario = repository.findById(id);
+    	if( usuario.isPresent() ) {
+    		usuario.get().setNombre(newUsuario.getNombre());
+    		usuario.get().setClave(newUsuario.getClave());
+    		return repository.save(usuario.get());    		
+    	}
     	
-    	//this.responseStatus(404,response);
+    	this.responseStatus(404,response);
     	
         return null;
     }
