@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-secondary">
+    <div class="container m-0 p-0" style="height: 100vh;">
+        <div class="row h-100">
+            <div class="col-auto h-100 pr-0">
+                <div class="sidebar bg-dark h-100 d-flex flex-column justify-content-around">
+                    <div class="estudiantes-container">
+                        <h3 class="text-info px-2">Cliente</h3>
+                        <div class="px-3">
+                            <span class="clientes-container__btn puntero">Obtener Clientes</span>
+                            <span class="clientes-container__btnId puntero">Filtrar por id</span>
+                        </div>
+                    </div>
+
+                    <div class="carreras-container">
+                        <h3 class="text-info px-2">Producto</h3>
+                        <div class="px-3">
+                            <span class="productos-container__btn puntero">Obtener Productos</span>
+                            <span class="productos-container__btnId puntero">Buscar por id</span>
+                            <!-- <span class="carreras-container__btnAgregarModal">Agregar</span>
+                            <span class="carreras-container__btnReporte">Obtener reporte inscriptos</span>
+                            <span class="carreras-container__btnEstudiantesCarreraModal">Obtener estudiantes de una carrera y ciudad</span> -->
+                        </div>
+                    </div>
+
+                    <div class="almacen-container">
+                        <h3 class="text-info px-2">Almacen</h3>
+                        <div class="px-3">
+                            <span class="almacen-container__btnVenta">Reporte ventas por clientes</span>
+                            <!-- <span class="matriculas-container__btnReporte">Obtener reportes</span> -->
+                            <!--         <span class="matriculas-container__btnMatricular">Matricular estudiante</span> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col main pt-5 d-flex justify-content-center"></div>
+        </div>
+    </div>
+
+    <!-- MODAL CLIENTE -->
+    <div id="modalCLiente" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Buscar por número de Cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-control cliente-container__numeroId" type="text" placeholder="Número id">
+                            <div class="mt-2 alert alert-info" role="alert">
+                                <p>Sugerencia de números: 2, 3, 4, 5, 6</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <span class="btn btn-info cliente-container__btnBuscar">Buscar</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CLIENTE -->
+    <div id="modalProducto" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Buscar por número de Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-control producto-container__numeroId" type="text" placeholder="Número id">
+                            <div class="mt-2 alert alert-info" role="alert">
+                                <p>Sugerencia de números: 7, 8, 8 ,10, 11, 12, 13, 14</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <span class="btn btn-info producto-container__btnBuscar">Buscar</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CARRERA ID -->
+    <!-- <div id="modalCarreraId" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Buscar por id de carrera</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-control carreras-container__input" type="text">
+                            <div class="mt-2 alert alert-info" role="alert">
+                                <p>Sugerencia de ids: 6, 7, 8</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <span class="btn btn-info carreras-container__btnCarreraId">Buscar</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- MODAL AGREGAR CARRERA -->
+    <!-- <div id="modalAgregarCarrera" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar carrera</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-control carreras-container__inputCarrera" placeholder="Nombre de la carrera" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <span class="btn btn-info carreras-container__btnAgregar">Agregar</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- MODAL ESTUDIANTES CARRERA -->
+    <!-- <div id="modalEstudiantesCarrera" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Buscar estudiantes de una carrera</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <select id="selectCarreras" class="form-control"></select>
+                            <div class="mt-2 alert alert-info" role="alert">
+                                <p>Nota: Ciudad por defecto "Bolivar"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <span class="btn btn-info carreras-container__btnCarreraEstudiantes">Buscar</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/CRUDGenerico.js"></script>
+    <script src="js/Cliente.js"></script>
+    <script src="js/Producto.js"></script>
+    <script src="js/Almacen.js"></script>
+    <!-- <script src="js/Carrera.js"></script>
+    <script src="js/Matricula.js"></script> -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+span {
+    color: white;
+    display: block;
+}
+
+span:hover {
+    color: #CCCCCC;
+}
+
+.puntero {
+    cursor: pointer;
+}

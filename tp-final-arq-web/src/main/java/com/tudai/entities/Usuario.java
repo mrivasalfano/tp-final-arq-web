@@ -17,13 +17,16 @@ public class Usuario {
 	private int id;
 	@Column
 	private String nombre;
+	@Column
+	private String contraseña; 
 	
 	public Usuario() {
 		
 	}
 	
-	public Usuario(String nombre){
-		this.nombre = nombre;	
+	public Usuario(String nombre, String contraseña){
+		this.nombre = nombre;
+		this.contraseña = contraseña;
 	}
 	
 }

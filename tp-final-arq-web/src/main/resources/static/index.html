@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-secondary">
+    <div class="container" style="height: 100vh; width: 100vw;">
+        <div class="row h-100">
+            <div class="col-auto h-100">
+                <form action="usuarios/login" method="POST">
+                    <h3 class="text-info">Login</h3>
+                    <label for="">Usuario</label>
+                    <input type="text" name="usuario" placeholder="ingrese su usuario">
+                    <label for="">Contraseña</label>
+                    <input type="text" name="contraseña" placeholder="Ingrese su contraseña">
+                    <button type="submit">Enviar</button>
+                </form>
+
+            </div>
+            <div class="col-auto">
+                <a href="home.html">Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

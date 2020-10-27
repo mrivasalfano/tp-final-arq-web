@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tudai.entities.Plan;
 import com.tudai.entities.PlanHotel;
 import com.tudai.entities.PlanVuelo;
+import com.tudai.entities.Usuario;
 import com.tudai.repositories.PlanRepository;
+import com.tudai.repositories.UsuarioRepository;
 
 /**
  * Inicializa datos esenciales que van a ser usados luego en LoadDatabase
@@ -26,6 +28,8 @@ class InitialDatabase implements CommandLineRunner{
 	
 	@Autowired
 	private PlanRepository planRepo;
+	@Autowired
+	private UsuarioRepository userRepo;
 
 	@Override
 	@Transactional
@@ -41,6 +45,8 @@ class InitialDatabase implements CommandLineRunner{
 //		
 //    	log.info("Preloading " + planRepo.save(pVuelo));
 //    	log.info("Preloading " + planRepo.save(pHotel));
+//		Usuario u = new Usuario("Manu", "1234");
+//    	log.info("Preloading User " + userRepo.save(u));
 		System.out.println("Paso 1 - InicialDatabase - Iniciar los primeros datos");
 	}
     

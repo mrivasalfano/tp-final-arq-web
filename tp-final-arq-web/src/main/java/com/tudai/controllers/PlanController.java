@@ -54,10 +54,18 @@ public class PlanController extends Controller {
     	return repository.getAllPlanHotel();
     }
     
-    //Pregunta: Hace falta hacer una ruta por ej /vuelos/{id}
-    //para separar? Los ids no se repiten de todas formas
     @GetMapping("/{id}")
     public Optional<Plan> getPlan(@PathVariable int id) {
+    	return repository.findById(id);
+    }
+    
+    @GetMapping("/vuelos/{id}")
+    public Optional<Plan> getPlanVuelo(@PathVariable int id) {
+    	return repository.findById(id);
+    }
+
+    @GetMapping("/hoteles/{id}")
+    public Optional<Plan> getPlanHotel(@PathVariable int id) {
     	return repository.findById(id);
     }
     

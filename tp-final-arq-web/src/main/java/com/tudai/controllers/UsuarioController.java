@@ -1,13 +1,11 @@
 package com.tudai.controllers;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +21,7 @@ import com.tudai.repositories.UsuarioRepository;
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController extends Controller {
-
+	
     @Qualifier("usuarioRepository")
     @Autowired
     private final UsuarioRepository repository;
@@ -41,10 +39,26 @@ public class UsuarioController extends Controller {
     public Optional<Usuario> getUsuario(@PathVariable int id) {
     	return repository.findById(id);
     }
+
+    //queda ver la clase de Juan de como implementarlo
+//    @RequestMapping(value="/login",
+//            method=RequestMethod.POST,
+//            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+//	public String createRole(@RequestBody MultiValueMap<String, String> formData){
+//		String nombre = formData.getFirst("usuario");
+//		String contraseña = formData.getFirst("contraseña");
+//		System.out.println(formData);
+//		Usuario usu = repository.findByName(nombre);
+//		if(usu != null) {
+//			System.out.println(usu.getContraseña().equals(contraseña));
+//		}
+//		System.out.println("USUARIO syso: " + usu);
+//    	return null;
+//	}
         
     @PostMapping("/")
     public Usuario newUsuario(@RequestBody Usuario u) {
-        return repository.save(u);
+    	return repository.save(u);
     }
     
     @PutMapping("/{id}")
