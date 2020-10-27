@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tudai.entities.Plan;
-import com.tudai.entities.PlanHotel;
 import com.tudai.entities.PlanVuelo;
 import com.tudai.entities.Usuario;
 import com.tudai.repositories.PlanRepository;
