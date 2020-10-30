@@ -1,6 +1,6 @@
 package com.tudai.entities;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +28,7 @@ public class PlanVuelo extends Plan{
 		super();
 	}
 	
-	public PlanVuelo(String nombre, int numVuelo, String compania, Timestamp fechaInicio, Timestamp fechaFin, String codigoReserva,
+	public PlanVuelo(String nombre, int numVuelo, String compania, Date fechaInicio, Date fechaFin, String codigoReserva,
 			int tiempoEscalaMin, String tipoAvion, String aeropuestoSalida, String aeropuestoLlegada) {
 		super(nombre, fechaInicio, fechaFin, codigoReserva);
 		this.numVuelo = numVuelo;

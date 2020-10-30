@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -31,7 +34,7 @@ public class Viaje {
 	private Date fechaFin;
 	@Column
 	private String descripcionBreve;
-	@OneToMany(mappedBy = "viaje")
+	@OneToMany(mappedBy = "viaje", cascade = CascadeType.PERSIST)
 	private List<Plan> planes;
 	@ManyToOne
 	private Usuario usuario;
@@ -50,5 +53,14 @@ public class Viaje {
 		this.descripcionBreve = descripcionBreve;
 	}
 	
+	public boolean addPlan(Plan p) {
+		//check en el repo si ya existe
+		if((p.getFechaInicio().compareTo(this.getFechaInicio()) >= 0) &&
+			(p.getFechaFin().compareTo(this.getFechaFin()) <=0) ) {
+				p.setViaje(this);
+				return this.planes.add(p);
+		}
+		return false;
+	}
 	
 }

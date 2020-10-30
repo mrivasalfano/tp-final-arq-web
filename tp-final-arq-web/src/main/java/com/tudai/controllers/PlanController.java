@@ -1,5 +1,7 @@
 package com.tudai.controllers;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.tudai.entities.Plan;
 import com.tudai.entities.PlanVuelo;
 import com.tudai.repositories.PlanRepository;
@@ -39,6 +42,35 @@ public class PlanController extends Controller {
     @GetMapping("/{id}")
     public Optional<Plan> getPlan(@PathVariable int id) {
     	return repository.findById(id);
+    }
+    
+    @GetMapping("/pendientes")
+    public List<Plan> getPlanesPendiente() {
+    	return repository.getAllPendiente();
+    }
+    
+    @GetMapping("/realizados")
+    public List<Plan> getPlanesRealizados() {
+    	return repository.getAllRealizado();
+    }
+    
+    @PostMapping("/periodo")
+    public List<Plan> getPlanesRangoFecha(@RequestBody JsonNode json) {
+    	Date fechaIni = Date.valueOf(json.get("fechaIni").asText());
+    	Date fechaFin = Date.valueOf(json.get("fechaFin").asText());
+    	if(fechaIni != null && fechaFin != null)
+    		return repository.getAllRangoFechas(fechaIni, fechaFin);
+    	else
+    		return null;
+    }
+    
+    @PostMapping("/zona")
+    public List<Plan> getPlanesZonaGeografica(@RequestBody JsonNode json) {
+    	String zona = json.get("zonaGeografica").asText();
+    	if(zona != null)
+    		return repository.getAllPlanesZona(zona);
+    	else
+    		return null;
     }
     
     @PostMapping("/")

@@ -1,8 +1,6 @@
 package com.tudai.entities;
 
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +11,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
+import lombok.ToString;
 
 @Inheritance(strategy=InheritanceType.JOINED)
 @Entity
@@ -26,19 +27,21 @@ public class Plan {
 	@Column
 	protected String nombre;
 	@Column
-	protected Timestamp fechaInicio;
+	protected Date fechaInicio;
 	@Column
-	protected Timestamp fechaFin;
+	protected Date fechaFin;
 	@Column
 	protected String codigoReserva;
 	@ManyToOne
+	@ToString.Exclude
+	@JsonIgnore
 	protected Viaje viaje;
 	
 	public Plan() {
 		super();
 	}
 	
-	public Plan( String nombre, Timestamp fechaInicio, Timestamp fechaFin, String codigoReserva) {
+	public Plan( String nombre, Date fechaInicio, Date fechaFin, String codigoReserva) {
 		super();
 		this.nombre = nombre;
 		this.fechaInicio = fechaInicio;
