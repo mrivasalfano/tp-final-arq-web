@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.tudai.entities.Plan;
 import com.tudai.entities.PlanVuelo;
 import com.tudai.repositories.PlanRepository;
+import com.tudai.utils.Views;
 
 @RestController
 @RequestMapping("/planes")
@@ -35,6 +37,7 @@ public class PlanController extends Controller {
     }
     
     @GetMapping("/")
+    @JsonView(Views.SinPlanes.class)
     public Iterable<Plan> getPlanes() {
     	return repository.findAll();
     }
