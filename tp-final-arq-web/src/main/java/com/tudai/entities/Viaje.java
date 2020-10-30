@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.tudai.utils.Views;
 
 import lombok.Data;
 
@@ -23,8 +25,10 @@ public class Viaje {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.SinPlanes.class)
 	private int id;
 	@Column
+	@JsonView(Views.SinPlanes.class)
 	private String nombre;
 	@Column
 	private String destino;

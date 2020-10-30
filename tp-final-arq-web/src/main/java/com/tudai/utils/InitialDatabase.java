@@ -57,16 +57,16 @@ class InitialDatabase implements CommandLineRunner{
 //           new Date(System.currentTimeMillis()+(24L*60*60*1000*4)), 
 //           new Date(System.currentTimeMillis()+(24L*60*60*1000*5)), 
 //       "1234", 0, "Volador 2", "Aeropuerto 2", "Aeropuerto 1");
-
+//
 //		Plan planComun2 = new Plan("Plan Comun 2", 
 //	               new Date(System.currentTimeMillis()-(24L*60*60*1000*10)), 
 //	               new Date(System.currentTimeMillis()), 
 //	               "1234");
-		
+//		
 //		v1.addPlan(pVuelo);
 //		v1.addPlan(planComun);
 //		v1.addPlan(pVuelo2);
-		
+//		
 //		log.info("Preloading " + viajeRepo.save(v1));
 		
 //    	log.info("Preloading " + planRepo.save(pVuelo));
