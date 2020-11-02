@@ -37,7 +37,7 @@ public class PlanController extends Controller {
     }
     
     @GetMapping("/")
-    @JsonView(Views.SinPlanes.class)
+//    @JsonView(Views.PlanConIdViaje.class)
     public Iterable<Plan> getPlanes() {
     	return repository.findAll();
     }

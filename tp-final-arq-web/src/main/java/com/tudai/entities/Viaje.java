@@ -1,5 +1,6 @@
 package com.tudai.entities;
 
+import java.lang.annotation.Repeatable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,10 +27,10 @@ public class Viaje {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonView(Views.SinPlanes.class)
+//	@JsonView(Views.PlanConIdViaje.class)
 	private int id;
 	@Column
-	@JsonView(Views.SinPlanes.class)
+//	@JsonView(Views.PlanConIdViaje.class)
 	private String nombre;
 	@Column
 	@JsonView(Views.SinPlanes.class)
@@ -42,7 +44,7 @@ public class Viaje {
 	@Column
 	@JsonView(Views.SinPlanes.class)
 	private String descripcionBreve;
-	@OneToMany(mappedBy = "viaje", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "viaje", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private List<Plan> planes;
 	@ManyToOne
 	@JsonView(Views.SinPlanes.class)
