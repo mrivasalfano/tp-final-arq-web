@@ -33,18 +33,23 @@ public class Viaje {
 //	@JsonView(Views.PlanConIdViaje.class)
 	private String nombre;
 	@Column
+//	@JsonView(Views.SinPlanes.class)
 	private String destino;
 	@Column
+//	@JsonView(Views.SinPlanes.class)
 	private Date fechaInicio;
 	@Column
+//	@JsonView(Views.SinPlanes.class)
 	private Date fechaFin;
 	@Column
+//	@JsonView(Views.SinPlanes.class)
 	private String descripcionBreve;
 //	@OneToMany(mappedBy = "viaje", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 //	@OneToMany()
 	@OneToMany(mappedBy = "viaje", fetch = FetchType.LAZY)
 	private List<Plan> planes;
 	@ManyToOne
+//	@JsonView(Views.SinPlanes.class)
 	private Usuario usuario;
 	
 	public Viaje() {

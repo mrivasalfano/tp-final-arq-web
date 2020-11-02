@@ -40,7 +40,6 @@ public class Plan {
 	@Column
 //    @JsonView(Views.PlanConIdViaje.class)
 	protected String codigoReserva;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
 	@JsonIgnore

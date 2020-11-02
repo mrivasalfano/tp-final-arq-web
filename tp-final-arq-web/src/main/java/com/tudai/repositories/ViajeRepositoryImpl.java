@@ -56,49 +56,4 @@ public class ViajeRepositoryImpl implements ViajeRepositoryCustom {
 		return reporte;
 	}
 	
-//	
-//	@Override
-//	@Transactional
-//	public List<ReporteVentaClientes> reporteVentaClientes(){
-//		//Lista sql
-//		List<Object[]> listadoClientesVentas = em.createQuery("SELECT v.id, v.cliente ,SUM(v.total) as totalVenta FROM Venta v GROUP BY v.cliente.id").getResultList();
-//		//Liste reporte
-//		List<ReporteVentaClientes> reporte = new ArrayList<ReporteVentaClientes>();
-//		
-//		ReporteVentaClientes reporteTemp;
-//		for (Object[] item : listadoClientesVentas) {
-//			reporteTemp = new ReporteVentaClientes((int) item[0], (Cliente) item[1], ((Double)item[2]));
-//			reporte.add(reporteTemp);			
-//		}
-//		return reporte;
-//	}
-//	
-//	@Override
-//	@Transactional
-//	public List<ReporteVentaRango> reporteVentaRango(Date fechaIni, Date fechaFin) {
-//		return em.createQuery(""
-//				+ "SELECT new com.tudai.repositories.ReporteVentaRango(v.fecha, SUM(v.total) AS acumulado) "
-//				+ "FROM Venta v "
-//				+ "WHERE v.fecha "
-//				+ "BETWEEN :fechaIni "
-//				+ "AND :fechaFin "
-//				+ "GROUP BY v.fecha").
-//				setParameter("fechaIni", fechaIni).
-//				setParameter("fechaFin", fechaFin).
-//				getResultList();
-//	}
-//	
-//	@Override
-//	@Transactional
-//	public ReporteProductoMasVendido productoMasVendido() {
-//		List<ReporteProductoMasVendido> listado= em.createQuery("SELECT new com.tudai.utils.ReporteProductoMasVendido(it.producto, SUM(it.cantidad) as acumulado)"
-//				+ "FROM ItemVenta it "
-//				+ "GROUP BY it.producto "
-//				+ "ORDER BY acumulado DESC ").setMaxResults(1).getResultList();
-//		if(listado.isEmpty()) {
-//			return null;
-//		}
-//		return listado.get(0);
-//	}
-	
 }
