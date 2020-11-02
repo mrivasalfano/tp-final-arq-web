@@ -12,6 +12,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.tudai.utils.Views;
 
 import lombok.Data;
 import lombok.ToString;
@@ -33,8 +35,8 @@ public class Plan {
 	@Column
 	protected String codigoReserva;
 	@ManyToOne
-	@ToString.Exclude
-	@JsonIgnore
+//	@ToString.Exclude
+//	@JsonIgnore
 	protected Viaje viaje;
 	
 	public Plan() {

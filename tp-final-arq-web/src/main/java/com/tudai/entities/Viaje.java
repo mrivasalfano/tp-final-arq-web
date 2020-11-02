@@ -31,16 +31,21 @@ public class Viaje {
 	@JsonView(Views.SinPlanes.class)
 	private String nombre;
 	@Column
+	@JsonView(Views.SinPlanes.class)
 	private String destino;
 	@Column
+	@JsonView(Views.SinPlanes.class)
 	private Date fechaInicio;
 	@Column
+	@JsonView(Views.SinPlanes.class)
 	private Date fechaFin;
 	@Column
+	@JsonView(Views.SinPlanes.class)
 	private String descripcionBreve;
 	@OneToMany(mappedBy = "viaje", cascade = CascadeType.PERSIST)
 	private List<Plan> planes;
 	@ManyToOne
+	@JsonView(Views.SinPlanes.class)
 	private Usuario usuario;
 	
 	public Viaje() {
