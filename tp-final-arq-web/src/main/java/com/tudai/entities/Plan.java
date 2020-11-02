@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.tudai.utils.Views;
 
 import lombok.Data;
 import lombok.ToString;
@@ -23,18 +26,24 @@ public class Plan {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @JsonView(Views.PlanConIdViaje.class)
 	protected int id;
 	@Column
+//    @JsonView(Views.PlanConIdViaje.class)
 	protected String nombre;
 	@Column
+//    @JsonView(Views.PlanConIdViaje.class)
 	protected Date fechaInicio;
 	@Column
+//    @JsonView(Views.PlanConIdViaje.class)
 	protected Date fechaFin;
 	@Column
+//    @JsonView(Views.PlanConIdViaje.class)
 	protected String codigoReserva;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
 	@JsonIgnore
+//    @JsonView(Views.PlanConIdViaje.class)
 	protected Viaje viaje;
 	
 	public Plan() {

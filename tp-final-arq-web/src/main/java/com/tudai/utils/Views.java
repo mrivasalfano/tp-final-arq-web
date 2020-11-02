@@ -1,7 +1,7 @@
 package com.tudai.utils;
 
 public class Views {
-	public static class SinPlanes {}
+	public static interface PlanConIdViaje {}
 	
-	public static class SinViaje {}
+	public static interface ViajeConPlan {}
 }

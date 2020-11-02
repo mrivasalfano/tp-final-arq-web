@@ -9,9 +9,9 @@ import com.tudai.entities.Viaje;
 
 public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
 	
-	@Query("SELECT v.destino, u.nombre, COUNT(*) AS cantidad "
-			+ "FROM Viaje v JOIN Usuario"
-			+ "GROUP BY v.usuario_id ")
+//	@Query("SELECT v.destino, u.nombre, COUNT(*) AS cantidad "
+//			+ "FROM Viaje v JOIN Usuario u "
+//			+ "GROUP BY v.usuario_id ")
 //	SELECT v.destino, v.usuario_id, COUNT(*) AS total FROM viaje v GROUP BY v.usuario_id
-	public List<Object[]> getReporteConMasViajes();
+//	public List<Object[]> getReporteConMasViajes();
 }

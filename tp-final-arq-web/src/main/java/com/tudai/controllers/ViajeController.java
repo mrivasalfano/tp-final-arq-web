@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.css.ViewCSS;
 
-
+import com.fasterxml.jackson.annotation.JsonView;
 import com.tudai.entities.Viaje;
 import com.tudai.repositories.ViajeRepository;
+import com.tudai.utils.Views;
 
 @RestController
 @RequestMapping("/viajes")
@@ -31,6 +33,7 @@ public class ViajeController extends Controller {
     }
     
     @GetMapping("/")
+//    @JsonView(Views.ViajeConPlan.class)
     public Iterable<Viaje> getViajes() {
     	return repository.findAll();
     }
