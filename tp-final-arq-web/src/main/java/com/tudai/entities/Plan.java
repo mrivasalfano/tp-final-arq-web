@@ -40,22 +40,29 @@ public class Plan {
 	@Column
 //    @JsonView(Views.PlanConIdViaje.class)
 	protected String codigoReserva;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
 	@JsonIgnore
 //    @JsonView(Views.PlanConIdViaje.class)
 	protected Viaje viaje;
 	
+	@Column
+	protected int idViaje;
+	
 	public Plan() {
 		super();
 	}
 	
-	public Plan( String nombre, Date fechaInicio, Date fechaFin, String codigoReserva) {
+	public Plan( String nombre, Date fechaInicio, Date fechaFin, String codigoReserva, Viaje v) {
 		super();
 		this.nombre = nombre;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.codigoReserva = codigoReserva;
+		this.viaje = v;
+		this.idViaje = v.getId();
 	}
+
 
 }

@@ -40,7 +40,9 @@ public class Viaje {
 	private Date fechaFin;
 	@Column
 	private String descripcionBreve;
-	@OneToMany(mappedBy = "viaje", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+//	@OneToMany(mappedBy = "viaje", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+//	@OneToMany()
+	@OneToMany(mappedBy = "viaje", fetch = FetchType.LAZY)
 	private List<Plan> planes;
 	@ManyToOne
 	private Usuario usuario;
@@ -59,14 +61,14 @@ public class Viaje {
 		this.descripcionBreve = descripcionBreve;
 	}
 	
-	public boolean addPlan(Plan p) {
-		//check en el repo si ya existe
-		if((p.getFechaInicio().compareTo(this.getFechaInicio()) >= 0) &&
-			(p.getFechaFin().compareTo(this.getFechaFin()) <=0) ) {
-				p.setViaje(this);
-				return this.planes.add(p);
-		}
-		return false;
-	}
+//	public boolean addPlan(Plan p) {
+//		//check en el repo si ya existe
+//		if((p.getFechaInicio().compareTo(this.getFechaInicio()) >= 0) &&
+//			(p.getFechaFin().compareTo(this.getFechaFin()) <=0) ) {
+//				p.setViaje(this);
+//				return this.planes.add(p);
+//		}
+//		return false;
+//	}
 	
 }

@@ -42,32 +42,29 @@ class InitialDatabase implements CommandLineRunner{
 //			new Date(System.currentTimeMillis()+(24L*60*60*1000*5)),
 //			"vacaciones en la costa"
 //		);
+//		Viaje vs = viajeRepo.save(v1);
 //		
 //		Plan pVuelo = new PlanVuelo("Plan vuelo 1", 2154, "Despegar", 
 //           new Date(System.currentTimeMillis()+(24L*60*60*1000*1)), 
 //           new Date(System.currentTimeMillis()+(24L*60*60*1000*2)), 
-//       "5578", 0, "Volador", "Aeropuerto 1", "Aeropuerto 2");
+//       "5578", 0, "Volador", "Aeropuerto 1", "Aeropuerto 2", vs);
 //
 //		Plan planComun = new Plan("Plan Comun 1", 
 //	        new Date(System.currentTimeMillis()+(24L*60*60*1000*2)), 
 //	        new Date(System.currentTimeMillis()+(24L*60*60*1000*4)), 
-//        "1234");
+//        "1234", vs);
 //
 //		Plan pVuelo2 = new PlanVuelo("Plan vuelo 2", 1234, "Despegar", 
 //           new Date(System.currentTimeMillis()+(24L*60*60*1000*4)), 
 //           new Date(System.currentTimeMillis()+(24L*60*60*1000*5)), 
-//       "1234", 0, "Volador 2", "Aeropuerto 2", "Aeropuerto 1");
+//       "1234", 0, "Volador 2", "Aeropuerto 2", "Aeropuerto 1", vs);
 //
 //		Plan planComun2 = new Plan("Plan Comun 2", 
 //	               new Date(System.currentTimeMillis()-(24L*60*60*1000*10)), 
 //	               new Date(System.currentTimeMillis()), 
-//	               "1234");
-//		
-//		v1.addPlan(pVuelo);
-//		v1.addPlan(planComun);
-//		v1.addPlan(pVuelo2);
-//		
-//		log.info("Preloading " + viajeRepo.save(v1));
+//	               "1234", vs);
+		
+//		log.info("Preloading " + vs);
 		
 //    	log.info("Preloading " + planRepo.save(pVuelo));
 //    	log.info("Preloading " + planRepo.save(pVuelo2));

@@ -1,5 +1,6 @@
 package com.tudai.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,8 @@ import org.w3c.dom.css.ViewCSS;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.tudai.entities.Viaje;
 import com.tudai.repositories.ViajeRepository;
+import com.tudai.utils.ReporteConMasZonas;
+import com.tudai.utils.ReporteUsuMasViajes;
 import com.tudai.utils.Views;
 
 @RestController
@@ -41,6 +44,15 @@ public class ViajeController extends Controller {
     @GetMapping("/{id}")
     public Optional<Viaje> getViaje(@PathVariable int id) {
     	return repository.findById(id);
+    }
+    
+    @GetMapping("/reporte")
+    public List<ReporteUsuMasViajes> getViajeConMasViajes() {
+    	return repository.getReporteConMasViajes();
+    }
+    @GetMapping("/reporte-zona")
+    public List<ReporteConMasZonas> getViajeConMasZonas() {
+    	return repository.getReporteConZona();
     }
     
     @PostMapping("/")
