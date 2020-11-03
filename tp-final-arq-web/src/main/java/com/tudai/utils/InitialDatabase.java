@@ -63,16 +63,16 @@ class InitialDatabase implements CommandLineRunner{
 //	               new Date(System.currentTimeMillis()-(24L*60*60*1000*10)), 
 //	               new Date(System.currentTimeMillis()), 
 //	               "1234", vs);
-		
+//		
 //		log.info("Preloading " + vs);
-		
+//		
 //    	log.info("Preloading " + planRepo.save(pVuelo));
 //    	log.info("Preloading " + planRepo.save(pVuelo2));
 //    	log.info("Preloading " + planRepo.save(planComun));
-    	
+//    	
 //    	log.info("Preloading " + planRepo.save(planComun2));
-//		Usuario u = new Usuario("Manu", "1234");
-//    	log.info("Preloading User " + userRepo.save(u));
+		//Usuario u = new Usuario("Manu", "1234");
+    	//log.info("Preloading User " + userRepo.save(u));
 		
 		System.out.println("Paso 1 - InicialDatabase - Iniciar los primeros datos");
 	}
