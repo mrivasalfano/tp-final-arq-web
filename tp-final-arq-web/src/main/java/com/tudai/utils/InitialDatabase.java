@@ -72,7 +72,7 @@ class InitialDatabase implements CommandLineRunner{
 //    	
 //    	log.info("Preloading " + planRepo.save(planComun2));
 //		Usuario u = new Usuario("Manu", "$2a$10$96aLmAt8Mlhmjw7HBLilGezX1Gw3/w8kIpmLicK/8xnPgG0hTg9qW");
-		
+//		
 //    	log.info("Preloading User " + userRepo.save(u));
 		
 		System.out.println("Paso 1 - InicialDatabase - Iniciar los primeros datos");
