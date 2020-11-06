@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import com.tudai.utils.ReporteConMasZonas;
 import com.tudai.utils.ReporteUsuMasViajes;
 
@@ -39,6 +40,8 @@ public class ViajeRepositoryImpl implements ViajeRepositoryCustom {
 		}
 		return reporte;
 	}
+	
+
 	
 	@Override
 	@Transactional

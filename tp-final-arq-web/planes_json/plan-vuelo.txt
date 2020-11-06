@@ -1,0 +1,12 @@
+{
+	"nombre": "Vuelo aeolineas.txt",
+        "fechaInicio": "2020-11-08",
+        "fechaFin": "2020-11-10",
+        "codigoReserva": "5578",
+        "numVuelo": 2154,
+        "compania": "Despegar",
+        "tiempoEscalaMin": 0,
+        "tipoAvion": "Volador",
+        "aeropuertoSalida": "Aeropuerto 1",
+	"aeropuertoLlegada": "Aeropuerto 2"
+}

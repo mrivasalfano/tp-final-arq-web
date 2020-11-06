@@ -2,13 +2,17 @@ package com.tudai.controllers;
 
 import java.sql.Date;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -108,19 +112,28 @@ public class UsuarioController extends Controller {
     
     @PostMapping("/authentication")
     public String authentication(@RequestBody Usuario u){
-		Usuario usu = repository.findByName(u.getNombre());
+    	String secretKey = "mySecretKey";
+    	String roles = "ROLE_USER";
+		
+		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
+				.commaSeparatedStringToAuthorityList(roles);
+    	Usuario usu = repository.findByName(u.getNombre());
 		JSONObject resp = new JSONObject();
 		if(usu != null) {
 			if(this.passwordEncoder.matches(u.getClave(), usu.getClave())) {
-				System.out.println("Entro");
+				//System.out.println("Entro");
 				String token = Jwts.builder()
-//						.setSubject("1234567890")
-//						.setId("7edd87d7-9ee7-4b81-ba11-b45bd4278b07")
+						.setSubject("1234567890")
+						.claim("authorities",
+								grantedAuthorities.stream()
+										.map(GrantedAuthority::getAuthority)
+										.collect(Collectors.toList()))
+						.setId("7edd87d7-9ee7-4b81-ba11-b45bd4278b07")
 						.setIssuedAt(new Date(System.currentTimeMillis()))
 						.setExpiration(new Date(System.currentTimeMillis() + 60 * 10000))
-						.claim("id", usu.getId())
+						.claim("userId", usu.getId())
 						.claim("name", usu.getNombre())
-						.signWith(SignatureAlgorithm.HS512, "secret".getBytes())
+						.signWith(SignatureAlgorithm.HS512, secretKey.getBytes())
 						.compact();
 				resp.put("name", u.getNombre());
 				resp.put("token", "Bearer " + token);

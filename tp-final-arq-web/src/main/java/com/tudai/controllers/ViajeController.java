@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.css.ViewCSS;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -38,6 +40,7 @@ public class ViajeController extends Controller {
     @GetMapping("/")
 //    @JsonView(Views.ViajeConPlan.class)
     public Iterable<Viaje> getViajes() {
+    	System.out.println("Viajes entro");
     	return repository.findAll();
     }
     
@@ -92,4 +95,6 @@ public class ViajeController extends Controller {
     		this.responseStatus(404,response);    		
     	}
     }
+    
+   
 }

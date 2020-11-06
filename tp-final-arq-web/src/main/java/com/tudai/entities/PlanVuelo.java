@@ -29,14 +29,14 @@ public class PlanVuelo extends Plan{
 	}
 	
 	public PlanVuelo(String nombre, int numVuelo, String compania, Date fechaInicio, Date fechaFin, String codigoReserva,
-			int tiempoEscalaMin, String tipoAvion, String aeropuestoSalida, String aeropuestoLlegada, Viaje idViaje) {
+			int tiempoEscalaMin, String tipoAvion, String aeropuertoSalida, String aeropuertoLlegada, Viaje idViaje) {
 		super(nombre, fechaInicio, fechaFin, codigoReserva, idViaje);
 		this.numVuelo = numVuelo;
 		this.compania = compania;
 		this.tiempoEscalaMin = tiempoEscalaMin;
 		this.tipoAvion = tipoAvion;
-		this.aeropuertoSalida = aeropuestoSalida;
-		this.aeropuertoLlegada = aeropuestoLlegada;
+		this.aeropuertoSalida = aeropuertoSalida;
+		this.aeropuertoLlegada = aeropuertoLlegada;
 	}
 	
 	

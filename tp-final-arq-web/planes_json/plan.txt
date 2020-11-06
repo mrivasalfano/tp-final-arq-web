@@ -1,0 +1,6 @@
+{
+	"nombre": "Hotel.txt",
+        "fechaInicio": "2020-11-08",
+        "fechaFin": "2020-11-10",
+        "codigoReserva": "5578"
+}
