@@ -26,8 +26,10 @@ import org.w3c.dom.css.ViewCSS;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.tudai.entities.Plan;
 import com.tudai.entities.PlanVuelo;
+import com.tudai.entities.Usuario;
 import com.tudai.entities.Viaje;
 import com.tudai.repositories.PlanRepository;
+import com.tudai.repositories.UsuarioRepository;
 import com.tudai.repositories.ViajeRepository;
 import com.tudai.utils.ReporteConMasZonas;
 import com.tudai.utils.ReporteUsuMasViajes;
@@ -39,15 +41,20 @@ public class ViajeController extends Controller {
 	@Qualifier("viajeRepository")
     @Autowired
     private final ViajeRepository repository;
+	@Qualifier("usuarioRepository")
+    @Autowired
+    private final UsuarioRepository usuRepository;
 	
 	@Qualifier("planRepository")
 	@Autowired
     private final PlanRepository planRepository;
 
     public ViajeController(@Qualifier("viajeRepository") ViajeRepository repository,
-    			           @Qualifier("planRepository") PlanRepository planRepository) {
+    			           @Qualifier("planRepository") PlanRepository planRepository,
+    			           @Qualifier("planRepository") UsuarioRepository usuRepository) {
         this.repository = repository;
         this.planRepository = planRepository;
+        this.usuRepository = usuRepository;
     }
     
     @GetMapping("/")
@@ -76,25 +83,33 @@ public class ViajeController extends Controller {
     }
     
     @PostMapping("/file")
-    public Viaje newViaje(@RequestParam("viaje") Viaje v, @RequestParam("file") MultipartFile file) {
-    	//PARSEAR A MANO EL VIAJE PARA GUARDARLO
-    	System.out.println(v);
-        Viaje viaje = repository.save(v);
-        
+    public Viaje newViaje(@RequestParam("file") MultipartFile file) { 
+    	Viaje viaje = null;
         String content = null;
         
 		try {
 			content = new String(file.getBytes());
 			JSONObject jsonContent = new JSONObject(content);
-			
+			System.out.println("---------------jsonContent: " + jsonContent);
 			Date f_inicio = Date.valueOf(jsonContent.getString("fechaInicio"));
 			Date f_fin = Date.valueOf(jsonContent.getString("fechaFin"));
+			String nom = jsonContent.getString("nombre");
+			String destino = jsonContent.getString("destino");
+			String descrip = jsonContent.getString("descripcionBreve");			
+			int idUsu = (Integer) SecurityContextHolder.getContext().getAuthentication().getDetails();	
+			System.out.println(idUsu);
+			Optional<Usuario> u = usuRepository.findById(idUsu);
+			if(u.isPresent()) {
+				Viaje vi = new Viaje(nom, destino,f_inicio, f_fin, descrip);
+				vi.setUsuario(u.get());
+				viaje = repository.save(vi);				
+			}
 			
-			Plan p = new PlanVuelo(jsonContent.getString("nombre"), jsonContent.getInt("numVuelo"), jsonContent.getString("compania"), 
-					f_inicio, f_fin, jsonContent.getString("codigoReserva"), jsonContent.getInt("tiempoEscalaMin"), 
-					jsonContent.getString("tipoAvion"), jsonContent.getString("aeropuertoSalida"), 
-					jsonContent.getString("aeropuertoLlegada"), viaje);
-			planRepository.save(p);
+//			Plan p = new PlanVuelo(jsonContent.getString("nombre"), jsonContent.getInt("numVuelo"), jsonContent.getString("compania"), 
+//					f_inicio, f_fin, jsonContent.getString("codigoReserva"), jsonContent.getInt("tiempoEscalaMin"), 
+//					jsonContent.getString("tipoAvion"), jsonContent.getString("aeropuertoSalida"), 
+//					jsonContent.getString("aeropuertoLlegada"), viaje);
+//			planRepository.save(p);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

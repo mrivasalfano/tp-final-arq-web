@@ -130,7 +130,7 @@ public class UsuarioController extends Controller {
 										.collect(Collectors.toList()))
 						.setId("7edd87d7-9ee7-4b81-ba11-b45bd4278b07")
 						.setIssuedAt(new Date(System.currentTimeMillis()))
-						.setExpiration(new Date(System.currentTimeMillis() + 60 * 10000))
+						.setExpiration(new Date(System.currentTimeMillis() + 60 * 10000 * 6)) //esta de 1hs
 						.claim("userId", usu.getId())
 						.claim("name", usu.getNombre())
 						.signWith(SignatureAlgorithm.HS512, secretKey.getBytes())
