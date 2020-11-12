@@ -19,7 +19,7 @@ import com.tudai.repositories.UsuarioRepository;
 import com.tudai.repositories.ViajeRepository;
 
 /**
- * Inicializa datos esenciales que van a ser usados luego en LoadDatabase
+ * Inicializa datos de testing
  * @author tudai bolivar
  */
 @Component
@@ -44,6 +44,10 @@ class InitialDatabase implements CommandLineRunner{
 		
 		Usuario u = new Usuario("Manu", "$2a$10$96aLmAt8Mlhmjw7HBLilGezX1Gw3/w8kIpmLicK/8xnPgG0hTg9qW");		
     	log.info("Preloading User " + userRepo.save(u));
+    	
+    	Usuario uAdmin = new Usuario("admin", "$2a$10$96aLmAt8Mlhmjw7HBLilGezX1Gw3/w8kIpmLicK/8xnPgG0hTg9qW");
+    	uAdmin.makeAdmin();
+    	log.info("Preloading User " + userRepo.save(uAdmin));
 		
 		Viaje v1 = new Viaje("Mis 40 en miami", "Miami", 
 //			new Date(System.currentTimeMillis()+(24L*60*60*1000*1)),

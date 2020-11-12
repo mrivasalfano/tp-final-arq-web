@@ -11,12 +11,7 @@ import com.tudai.entities.Viaje;
 import com.tudai.utils.ReporteConMasZonas;
 import com.tudai.utils.ReporteUsuMasViajes;
 
-public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
-	
-	public List<ReporteUsuMasViajes> getReporteConMasViajes();
-	
-	public List<ReporteConMasZonas> getReporteConZona();
-	
+public interface ViajeRepository extends JpaRepository<Viaje, Integer>, ViajeRepositoryCustom {
 
 	@Query("SELECT v "
 			+ "FROM Viaje v "

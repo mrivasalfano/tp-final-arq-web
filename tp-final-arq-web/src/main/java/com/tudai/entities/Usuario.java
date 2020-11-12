@@ -19,6 +19,8 @@ public class Usuario {
 	private String nombre;
 	@Column
 	private String clave; 
+	@Column
+	private boolean isAdmin;
 	
 	public Usuario() {
 		
@@ -27,6 +29,15 @@ public class Usuario {
 	public Usuario(String nombre, String clave){
 		this.nombre = nombre;
 		this.clave = clave;
+		this.isAdmin = false;
+	}
+	
+	public void makeAdmin() {
+		this.isAdmin = true;
+	}
+	
+	public boolean isAdmin() {
+		return this.isAdmin;
 	}
 	
 }
