@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.css.ViewCSS;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.tudai.entities.Plan;
 import com.tudai.entities.PlanVuelo;
 import com.tudai.entities.Usuario;
@@ -76,6 +77,28 @@ public class ViajeController extends Controller {
     public List<ReporteConMasZonas> getViajeConMasZonas() {
     	return repository.getReporteConZona();
     }
+    
+    @GetMapping("/reporte-estado/{estado}")
+    public List<Viaje> getViajeEstado(@PathVariable String estado) {
+    	if (estado.equals("pendiente")) {
+    		return repository.getReportePendiente();
+    	}
+    	if(estado.equals("realizado")) {
+    		return repository.getReporteRealizado();
+    	}
+    	return null;
+    	
+    }
+    
+    @PostMapping("/reporte-periodo")
+	public List<Viaje> getPlanesRangoFecha(@RequestBody JsonNode json) {
+		Date fechaIni = Date.valueOf(json.get("fechaIni").asText());
+		Date fechaFin = Date.valueOf(json.get("fechaFin").asText());
+		if(fechaIni != null && fechaFin != null)
+			return repository.getAllRangoFechas(fechaIni, fechaFin);
+		else
+			return null;
+	}
     
     @PostMapping("/")
     public Viaje newViaje(@RequestBody Viaje v) {

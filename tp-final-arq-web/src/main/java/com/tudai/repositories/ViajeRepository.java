@@ -21,6 +21,22 @@ public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
 	@Query("SELECT v "
 			+ "FROM Viaje v "
 			+ "WHERE v.fechaInicio <= :fechaIni AND v.fechaFin >= :fechaFin AND v.usuario.id = :usuarioId ")
-	Viaje getViajeByFecha(Date fechaIni, Date fechaFin, int usuarioId);
+	public Viaje getViajeByFecha(Date fechaIni, Date fechaFin, int usuarioId);
+
+	@Query("SELECT v "
+			+ "FROM Viaje v "
+			+ "WHERE v.fechaInicio > current_date()")
+	public List<Viaje> getReportePendiente();
+
+	@Query("SELECT v "
+			+ "FROM Viaje v "
+			+ "WHERE v.fechaFin < current_date()")
+	public List<Viaje> getReporteRealizado();
+
+	@Query("SELECT v "
+			+ "FROM Viaje v "
+			+ "WHERE v.fechaInicio BETWEEN :fechaIni AND :fechaFin "
+			+ "ORDER BY v.fechaInicio")
+	public List<Viaje> getAllRangoFechas(Date fechaIni, Date fechaFin);
 	
 }

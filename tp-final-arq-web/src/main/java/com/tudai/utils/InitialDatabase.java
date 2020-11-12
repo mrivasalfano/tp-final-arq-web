@@ -53,9 +53,29 @@ class InitialDatabase implements CommandLineRunner{
 			"vacaciones en la costa"
 		);
 		
+		Viaje v2 = new Viaje("JODA realizada", "Hawai", 
+//				new Date(System.currentTimeMillis()+(24L*60*60*1000*1)),
+//				new Date(System.currentTimeMillis()+(24L*60*60*1000*5)),
+		           new Date(System.currentTimeMillis()-(24L*60*60*1000*5)), 
+		           new Date(System.currentTimeMillis()-(24L*60*60*1000*1)),  
+				"vacaciones"
+			);
+		
+		Viaje v3 = new Viaje("JODA pendiente", "abajo del puente", 
+//				new Date(System.currentTimeMillis()+(24L*60*60*1000*1)),
+//				new Date(System.currentTimeMillis()+(24L*60*60*1000*5)),
+		           new Date(System.currentTimeMillis()+(24L*60*60*1000*10)), 
+		           new Date(System.currentTimeMillis()+(24L*60*60*1000*15)),  
+				"vacaciones"
+			);
+		
 		v1.setUsuario(u);
+		v2.setUsuario(u);
+		v3.setUsuario(u);
 		
 		Viaje vs = viajeRepo.save(v1);
+		Viaje vs2 = viajeRepo.save(v2);
+		Viaje vs3 = viajeRepo.save(v3);
 		
 		Plan pVuelo = new PlanVuelo("Plan vuelo 1", 2154, "Despegar", 
            new Date(System.currentTimeMillis()+(24L*60*60*1000*1)), 
