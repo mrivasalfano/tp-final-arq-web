@@ -82,7 +82,7 @@ public class ViajeController extends Controller {
         return repository.save(v);
     }
     
-    @PostMapping("/file")
+    @PostMapping("/upload-file")
     public Viaje newViaje(@RequestParam("file") MultipartFile file) { 
     	Viaje viaje = null;
         String content = null;
@@ -90,26 +90,39 @@ public class ViajeController extends Controller {
 		try {
 			content = new String(file.getBytes());
 			JSONObject jsonContent = new JSONObject(content);
-			System.out.println("---------------jsonContent: " + jsonContent);
 			Date f_inicio = Date.valueOf(jsonContent.getString("fechaInicio"));
 			Date f_fin = Date.valueOf(jsonContent.getString("fechaFin"));
 			String nom = jsonContent.getString("nombre");
 			String destino = jsonContent.getString("destino");
 			String descrip = jsonContent.getString("descripcionBreve");			
-			int idUsu = (Integer) SecurityContextHolder.getContext().getAuthentication().getDetails();	
-			System.out.println(idUsu);
-			Optional<Usuario> u = usuRepository.findById(idUsu);
-			if(u.isPresent()) {
+			int idUsu = (Integer) SecurityContextHolder.getContext().getAuthentication().getDetails();
+//			Optional<Usuario> u = usuRepository.findById(idUsu);
+			Usuario u = usuRepository.findByName("Manu");
+//			if(u.isPresent()) {
 				Viaje vi = new Viaje(nom, destino,f_inicio, f_fin, descrip);
-				vi.setUsuario(u.get());
+//				vi.setUsuario(u.get());
+				vi.setUsuario(u);
 				viaje = repository.save(vi);				
-			}
+//			}
 			
-//			Plan p = new PlanVuelo(jsonContent.getString("nombre"), jsonContent.getInt("numVuelo"), jsonContent.getString("compania"), 
-//					f_inicio, f_fin, jsonContent.getString("codigoReserva"), jsonContent.getInt("tiempoEscalaMin"), 
-//					jsonContent.getString("tipoAvion"), jsonContent.getString("aeropuertoSalida"), 
-//					jsonContent.getString("aeropuertoLlegada"), viaje);
-//			planRepository.save(p);
+			JSONObject planVuelo = jsonContent.getJSONObject("planVuelo");
+			nom = planVuelo.getString("nombre");
+			f_inicio = Date.valueOf(planVuelo.getString("fechaInicio"));
+			f_fin = Date.valueOf(planVuelo.getString("fechaFin"));
+			String codReserva = planVuelo.getString("codigoReserva");
+			int numVuelo = planVuelo.getInt("numVuelo");
+			String compania = planVuelo.getString("compania");
+			int tiempoEscalaMin = planVuelo.getInt("tiempoEscalaMin");
+			String tipoAvion = planVuelo.getString("tipoAvion");
+			String aeropuertoSalida = planVuelo.getString("aeropuertoSalida");
+			String aeropuertoLlegada = planVuelo.getString("aeropuertoLlegada");
+			
+			Plan p = new PlanVuelo(nom, numVuelo, compania, f_inicio, f_fin, codReserva,
+								   tiempoEscalaMin, tipoAvion, aeropuertoSalida, 
+								   aeropuertoLlegada, viaje);
+			
+			//FALTA AGREGAR EL PLAN AL VIAJE ASÍ SE MUESTRA
+			planRepository.save(p);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
