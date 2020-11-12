@@ -22,6 +22,11 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
 
+/**
+ * Se encarga de crear y validar Tokens 
+ * @author HP-Lucho
+ *
+ */
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
 	private final String HEADER = "Authorization";

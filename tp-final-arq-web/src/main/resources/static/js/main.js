@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(authentication => USUARIO.getAuthentication(authentication));
     });
 	
-	
 
 	function renderHTML(resp) {
 		document.querySelector('bodyContainer').innerHTML = resp;

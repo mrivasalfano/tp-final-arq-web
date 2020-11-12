@@ -7,6 +7,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Se encarga de habilitar el filtro por TOKEN y a su vez
+ * dejar algunas rutas libre de autorización
+ * @author Team-Bolivar
+ * @version v1.0
+ * @since   2020-11-17
+ */
 @EnableWebSecurity
 @Configuration
 public class LoginConfiguration extends WebSecurityConfigurerAdapter {
@@ -21,6 +28,7 @@ public class LoginConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.GET, "/js/**").permitAll()
 			.antMatchers(HttpMethod.GET, "/usuarios/").permitAll()
 //			.antMatchers(HttpMethod.GET, "/home/").permitAll()
+//			.antMatchers(HttpMethod.GET, "/home2.html").permitAll()
 			.antMatchers(HttpMethod.POST, "/usuarios/").permitAll()
 			.antMatchers(HttpMethod.DELETE, "/usuarios/**").permitAll()
 			.antMatchers(HttpMethod.POST, "/usuarios/authentication/").permitAll()
