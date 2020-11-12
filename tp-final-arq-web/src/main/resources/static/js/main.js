@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	
     // --------------------------USUARIO--------------------------
     document.querySelector('.btnLogin').addEventListener('click', (e) => {
-	e.preventDefault();
+		e.preventDefault();
         let nombre = document.querySelector("[name='usuario']").value;
         let clave = document.querySelector("[name='clave']").value;
 		let data = {
@@ -15,4 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		USUARIO.postModular("authentication/", data)
             .then(authentication => USUARIO.getAuthentication(authentication));
     });
+	
+	
+
+	function renderHTML(resp) {
+		document.querySelector('bodyContainer').innerHTML = resp;
+	}
+
 });

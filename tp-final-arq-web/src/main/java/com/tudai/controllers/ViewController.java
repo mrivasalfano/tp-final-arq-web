@@ -10,7 +10,7 @@ public class ViewController {
 	
 	@GetMapping("/home")
 	public String greeting( String name, Model model) {
-		model.addAttribute("name", "hola hola hola");
+		model.addAttribute("name", "hola hola hola asdasdasdasdasdasd");
 		return "home";
 	}
 
