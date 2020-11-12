@@ -66,6 +66,10 @@ public class Viaje {
 		this.descripcionBreve = descripcionBreve;
 	}
 	
+	public void addPlan(Plan p) {
+		this.planes.add(p);
+	}
+	
 //	public boolean addPlan(Plan p) {
 //		//check en el repo si ya existe
 //		if((p.getFechaInicio().compareTo(this.getFechaInicio()) >= 0) &&

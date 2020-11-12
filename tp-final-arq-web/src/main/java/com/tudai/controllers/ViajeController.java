@@ -121,8 +121,12 @@ public class ViajeController extends Controller {
 								   tiempoEscalaMin, tipoAvion, aeropuertoSalida, 
 								   aeropuertoLlegada, viaje);
 			
-			//FALTA AGREGAR EL PLAN AL VIAJE ASÍ SE MUESTRA
+			
+			
+			viaje.addPlan(p);
 			planRepository.save(p);
+//			repository.save(viaje);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
