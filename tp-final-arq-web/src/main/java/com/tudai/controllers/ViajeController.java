@@ -106,7 +106,7 @@ public class ViajeController extends Controller {
     }
     
     @PostMapping("/upload-file")
-    public Viaje newViaje(@RequestParam("file") MultipartFile file) { 
+    public Viaje newViaje(@RequestParam("file") MultipartFile file, HttpServletResponse response) { 
     	Viaje viaje = null;
         String content = null;
         
@@ -119,39 +119,38 @@ public class ViajeController extends Controller {
 			String destino = jsonContent.getString("destino");
 			String descrip = jsonContent.getString("descripcionBreve");			
 			int idUsu = (Integer) SecurityContextHolder.getContext().getAuthentication().getDetails();
-//			Optional<Usuario> u = usuRepository.findById(idUsu);
-			Usuario u = usuRepository.findByName("Manu");
-//			if(u.isPresent()) {
+			Optional<Usuario> u = usuRepository.findById(idUsu);
+			if(u.isPresent()) {
+				System.out.println("idUsu: --------------------------" + u.get());				
 				Viaje vi = new Viaje(nom, destino,f_inicio, f_fin, descrip);
-//				vi.setUsuario(u.get());
-				vi.setUsuario(u);
+				vi.setUsuario(u.get());
 				viaje = repository.save(vi);				
-//			}
 			
-			JSONObject planVuelo = jsonContent.getJSONObject("planVuelo");
-			nom = planVuelo.getString("nombre");
-			f_inicio = Date.valueOf(planVuelo.getString("fechaInicio"));
-			f_fin = Date.valueOf(planVuelo.getString("fechaFin"));
-			String codReserva = planVuelo.getString("codigoReserva");
-			int numVuelo = planVuelo.getInt("numVuelo");
-			String compania = planVuelo.getString("compania");
-			int tiempoEscalaMin = planVuelo.getInt("tiempoEscalaMin");
-			String tipoAvion = planVuelo.getString("tipoAvion");
-			String aeropuertoSalida = planVuelo.getString("aeropuertoSalida");
-			String aeropuertoLlegada = planVuelo.getString("aeropuertoLlegada");
-			
-			Plan p = new PlanVuelo(nom, numVuelo, compania, f_inicio, f_fin, codReserva,
-								   tiempoEscalaMin, tipoAvion, aeropuertoSalida, 
-								   aeropuertoLlegada, viaje);
-			
-			
-			
-			viaje.addPlan(p);
-			planRepository.save(p);
-//			repository.save(viaje);
+				JSONObject planVuelo = jsonContent.getJSONObject("planVuelo");
+				nom = planVuelo.getString("nombre");
+				f_inicio = Date.valueOf(planVuelo.getString("fechaInicio"));
+				f_fin = Date.valueOf(planVuelo.getString("fechaFin"));
+				String codReserva = planVuelo.getString("codigoReserva");
+				int numVuelo = planVuelo.getInt("numVuelo");
+				String compania = planVuelo.getString("compania");
+				int tiempoEscalaMin = planVuelo.getInt("tiempoEscalaMin");
+				String tipoAvion = planVuelo.getString("tipoAvion");
+				String aeropuertoSalida = planVuelo.getString("aeropuertoSalida");
+				String aeropuertoLlegada = planVuelo.getString("aeropuertoLlegada");
+				
+				Plan p = new PlanVuelo(nom, numVuelo, compania, f_inicio, f_fin, codReserva,
+									   tiempoEscalaMin, tipoAvion, aeropuertoSalida, 
+									   aeropuertoLlegada, viaje);
+				
+				viaje.addPlan(p);
+				planRepository.save(p);
+	    		this.responseStatus(200, response);
+			} else {
+//				response.sendRedirect("/");
+	    		this.responseStatus(404, response);
+			}
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         

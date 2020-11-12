@@ -27,9 +27,12 @@ public class ViajeRepositoryImpl implements ViajeRepositoryCustom {
 
 	@Override
 	@Transactional
+	@SuppressWarnings("unchecked")
 	public List<ReporteUsuMasViajes> getReporteConMasViajes() {
 		//Lista sql
-		List<Object[]> listadoClientesVentas = em.createQuery("SELECT v.destino, v.usuario.nombre, COUNT(*) AS cantidad FROM Viaje v GROUP BY v.usuario.id ORDER BY cantidad DESC").getResultList();
+		List<Object[]> listadoClientesVentas = em.createQuery(""
+				+ "SELECT v.destino, v.usuario.nombre, COUNT(*) AS cantidad "
+				+ "FROM Viaje v GROUP BY v.usuario.id ORDER BY cantidad DESC").getResultList();
 //		Liste reporte
 		List<ReporteUsuMasViajes> reporte = new ArrayList<ReporteUsuMasViajes>();
 		

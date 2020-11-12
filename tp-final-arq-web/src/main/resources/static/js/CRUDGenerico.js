@@ -32,8 +32,9 @@ class CRUDGenerico {
             },
             body: JSON.stringify(data)
         });
-
-        if (!response.ok) {
+	    if (response.ok) {
+            return await response.json();		
+		} else {
             const error = await response.text();
             return Promise.reject(error);
         }

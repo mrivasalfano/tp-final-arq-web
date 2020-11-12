@@ -20,6 +20,7 @@ public class LoginConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.GET, "/css/**").permitAll()
 			.antMatchers(HttpMethod.GET, "/js/**").permitAll()
 			.antMatchers(HttpMethod.GET, "/usuarios/").permitAll()
+//			.antMatchers(HttpMethod.GET, "/home/").permitAll()
 			.antMatchers(HttpMethod.POST, "/usuarios/").permitAll()
 			.antMatchers(HttpMethod.DELETE, "/usuarios/**").permitAll()
 			.antMatchers(HttpMethod.POST, "/usuarios/authentication/").permitAll()
