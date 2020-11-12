@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,6 @@ import com.tudai.repositories.UsuarioRepository;
 import com.tudai.repositories.ViajeRepository;
 import com.tudai.utils.ReporteConMasZonas;
 import com.tudai.utils.ReporteUsuMasViajes;
-import com.tudai.utils.Views;
 
 @RestController
 @RequestMapping("/viajes")
@@ -70,10 +70,14 @@ public class ViajeController extends Controller {
     }
     
     @GetMapping("/reporte")
-    public List<ReporteUsuMasViajes> getViajeConMasViajes() {
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<ReporteUsuMasViajes> getUsuariosConMasViajes() {
     	return repository.getReporteConMasViajes();
     }
+    
+    
     @GetMapping("/reporte-zona")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<ReporteConMasZonas> getViajeConMasZonas() {
     	return repository.getReporteConZona();
     }

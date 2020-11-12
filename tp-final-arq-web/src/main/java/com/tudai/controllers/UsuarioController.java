@@ -112,16 +112,23 @@ public class UsuarioController extends Controller {
     
     @PostMapping("/authentication")
     public String authentication(@RequestBody Usuario u){
-    	String secretKey = "mySecretKey";
-    	String roles = "ROLE_USER";
-		
-		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-				.commaSeparatedStringToAuthorityList(roles);
     	Usuario usu = repository.findByName(u.getNombre());
+    	String secretKey = "mySecretKey";
+    	String roles = "";
+    	
+    	if(usu.isAdmin()) {
+    		roles = "ADMIN";
+    	}
+    	else {
+    		roles = "USER";
+    	}
+    	
+		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
+				.commaSeparatedStringToAuthorityList(roles);    		
+    	
 		JSONObject resp = new JSONObject();
 		if(usu != null) {
 			if(this.passwordEncoder.matches(u.getClave(), usu.getClave())) {
-				//System.out.println("Entro");
 				String token = Jwts.builder()
 						.setSubject("1234567890")
 						.claim("authorities",

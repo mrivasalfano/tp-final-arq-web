@@ -18,6 +18,10 @@ import com.tudai.utils.ReporteUsuMasViajes;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Necesaria para implementar consultas más específicas
+ * haciendo uso del EntityManager de JPA
+ */
 @Repository
 @Slf4j
 public class ViajeRepositoryImpl implements ViajeRepositoryCustom {
