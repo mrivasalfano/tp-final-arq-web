@@ -12,7 +12,25 @@ class CRUDGenerico {
         return this.getModular('');
     }
 
-    async getModular(uri) {
+    async getModularAuthorization(uri,token) {
+        const response = await fetch(this.BASEURI + "/" + this.RESOURCE + uri, {
+			method: 'GET', 
+			headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+				'Authorization' : token
+            }
+		});
+
+        if (response.ok)
+            return await response.json();
+        else {
+            const errorMessage = await response.json();
+            return Promise.reject(errorMessage);
+        }
+    }
+
+	async getModular(uri) {
         const response = await fetch(this.BASEURI + "/" + this.RESOURCE + uri);
 
         if (response.ok)
@@ -35,8 +53,45 @@ class CRUDGenerico {
 	    if (response.ok) {
             return await response.json();		
 		} else {
-            const error = await response.text();
+            const error = await response.json();
             return Promise.reject(error);
+        }
+    }
+
+	async postModularAuthorization(uri, data,token) {
+        const response = await fetch(this.BASEURI + '/' + this.RESOURCE + uri, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+				'Authorization' : token
+            },
+            body: JSON.stringify(data)
+        });
+	    if (response.ok) {
+            return await response.json();		
+		} else {
+            const error = await response.json();
+            return Promise.reject(error);
+			//return 'error';
+        }
+    }
+
+	async postFormModularAuthorization(uri, data,token) {
+        const response = await fetch(this.BASEURI + '/' + this.RESOURCE + uri, {
+            method: 'POST',
+            headers: {
+				'Authorization' : token
+            },
+            body: data
+        });
+	    if (response.ok) {
+            return await response.json();		
+		} else {
+			console.log(response);
+            const error = await response.json();
+            return Promise.reject(error);
+			//return 'error';
         }
     }
 }

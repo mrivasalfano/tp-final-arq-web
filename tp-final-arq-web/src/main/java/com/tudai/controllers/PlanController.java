@@ -137,16 +137,19 @@ public class PlanController extends Controller {
 	}
 
 	@PostMapping("/upload-plan")	
-	public Plan uploadFile(@RequestParam("file") MultipartFile file) {
+	public Plan uploadFile(@RequestParam("file") MultipartFile file, HttpServletResponse response) {
 		String content = null;
+		System.out.println("ANTES");
 		try {
+			System.out.println("TRY");
 			content = new String(file.getBytes());
 			JSONObject jsonContent = new JSONObject(content);
 			Date f_inicio = Date.valueOf(jsonContent.getString("fechaInicio"));
 			Date f_fin = Date.valueOf(jsonContent.getString("fechaFin"));
 			// buscar viaje por fecha
-			
+			System.out.println("HOLAAA "+f_inicio+" "+f_fin);
 			Viaje v = vrepository.getViajeByFecha(f_inicio, f_fin, (Integer) SecurityContextHolder.getContext().getAuthentication().getDetails());
+			System.out.println(v);
 			if(v != null){
 				System.out.println("Encontro viaje");
 				Plan p = null;
@@ -166,6 +169,10 @@ public class PlanController extends Controller {
 				
 				return p;
 			}
+			else {
+				this.responseStatus(406, response);
+			}
+			
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
