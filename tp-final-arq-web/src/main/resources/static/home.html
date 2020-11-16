@@ -20,10 +20,10 @@
                             <span class="viajes-container__btn puntero">Obtener Viajes</span>
                             <span class="viajes-container__btnReport puntero">Obtener reporte</span>
                             <span class="viajes-container__btnId puntero">Filtrar por id</span>
-                             <span class="viajes-container__btnCargar puntero" data-type="viaje">Cargar Viaje</span>
-                              <span class="viajes-container__btnCargarPlan puntero" data-type="plan">Cargar Plan</span>
-                                <span class="viajes-container__btnCrear puntero" data-type="viaje">Crear Viaje</span>
-                              <span class="viajes-container__btnCrearPlan puntero" data-type="plan">Crear Plan</span>
+                            <span class="viajes-container__btnCargar puntero" data-type="viaje">Cargar Viaje</span>
+                            <span class="viajes-container__btnCargarPlan puntero" data-type="plan">Cargar Plan</span>
+                            <span class="viajes-container__btnCrear puntero" data-type="viaje">Crear Viaje</span>
+                            <span class="viajes-container__btnCrearPlan puntero" data-type="plan">Crear Plan</span>
                         </div>
                     </div>
 
@@ -46,7 +46,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col main pt-5">
+            <div class="col pt-5">
+                <div class="col main"></div>
+                <div class="col planes"></div>
             </div>
         </div>
     </div>
@@ -78,191 +80,191 @@
             </div>
         </div>
     </div>
-    
+
     <!-- MODAL VIAJE  -->
     <div class="modal fade" id="modalViajeId" tabindex="-1">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title">Ingrese un ID</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ingrese un ID</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	<div class="row">
-	      		<div class="col-12">
-	      			 <input class="form-control viaje-container__numeroId" type="text" placeholder="Número id">
-	      		</div>
-	      	</div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-	        <span class="btn btn-info viaje-container__btnViajeId">Buscar</span>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
-	<!-- MODAL CREAR VIAJE  -->
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <input class="form-control viaje-container__numeroId" type="text" placeholder="Número id">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <span class="btn btn-info viaje-container__btnViajeId">Buscar</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CREAR VIAJE  -->
     <div class="modal fade" id="modalViajeCrear" tabindex="-1">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title">Crear un Viaje</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crear un Viaje</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	<div class="row">
-	      		
-	      		<div class="col-12 mt-2">
-	      			 <input class="form-control viaje-container__numeroId" type="text" id="travelName" placeholder="Nombre del viaje">
-	      		</div>
-	      		<div class="col-6 mt-2">
-	      			 <input class="form-control viaje-container__numeroId" type="text" id="travelDescription" placeholder="Descripcion">
-	      		</div>
-	      		<div class="col-6 mt-2">
-	      			 <input class="form-control viaje-container__numeroId" type="text" id="travelDestination" placeholder="Destino">
-	      		</div>
-	      		<div class="col-6 mt-2">
-	      			 <small class="text-muted">Fecha inicio</small>
-	      			 <input class="form-control viaje-container__numeroId" type="date" id="travelInitialDate" placeholder="Fecha inicio">
-	      		</div>
-	      		<div class="col-6 mt-2">
-	      			 <small class="text-muted">Fecha fin</small>
-	      			 <input class="form-control viaje-container__numeroId" type="date" id="travelEndDate" placeholder="Fecha fin">
-	      		</div>
-	      	</div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-	        <span class="btn btn-info viaje-container__btnViajeCrear">Crear</span>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
-	
-	<!-- MODAL CREAR PLAN  -->
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-12 mt-2">
+                            <input class="form-control viaje-container__numeroId" type="text" id="travelName" placeholder="Nombre del viaje">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <input class="form-control viaje-container__numeroId" type="text" id="travelDescription" placeholder="Descripcion">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <input class="form-control viaje-container__numeroId" type="text" id="travelDestination" placeholder="Destino">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <small class="text-muted">Fecha inicio</small>
+                            <input class="form-control viaje-container__numeroId" type="date" id="travelInitialDate" placeholder="Fecha inicio">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <small class="text-muted">Fecha fin</small>
+                            <input class="form-control viaje-container__numeroId" type="date" id="travelEndDate" placeholder="Fecha fin">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <span class="btn btn-info viaje-container__btnViajeCrear">Crear</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL CREAR PLAN  -->
     <div class="modal fade" id="modalViajeCrearPlan" tabindex="-1">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title">Crear un Plan</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crear un Plan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	<div class="row">
-	      	
-	      		<div class="col-12 mt-2">
-	      			 <select class="form-control" id="selectViajes">
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-12 mt-2">
+                            <select class="form-control" id="selectViajes">
 				     
 				      
 				    </select>
-	      		</div>
-	      		
-	      		<div class="col-6 mt-2">
-	      			 <input class="form-control viaje-container__numeroId" type="text" id="travelName" placeholder="Codigo reserva">
-	      		</div>
-	      		<div class="col-6 mt-2">
-	      			 <input class="form-control viaje-container__numeroId" type="text" id="travelDescription" placeholder="Nombre">
-	      		</div>
-	      		<div class="col-6 mt-2">
-	      			 <small class="text-muted">Fecha inicio</small>
-	      			 <input class="form-control viaje-container__numeroId" type="date" id="travelInitialDate" placeholder="Fecha inicio">
-	      		</div>
-	      		<div class="col-6 mt-2">
-	      			 <small class="text-muted">Fecha fin</small>
-	      			 <input class="form-control viaje-container__numeroId" type="date" id="travelEndDate" placeholder="Fecha fin">
-	      		</div>
-	      		<div class="col-12 mt-4  ">
-	      			 <h6>En caso de ser un vuelo, completar los siguientes campos:</h6>
-	      		</div>
-	      		
-	      		<div class="col-6 mt-2">
-	      			 <input class="form-control viaje-container__numeroId" type="text" id="travelDescription" placeholder="Aeropuerto Origen">
-	      		</div>
-	      		<div class="col-6 mt-2">
-	      			 <input class="form-control viaje-container__numeroId" type="text" id="travelDescription" placeholder="Aeropuerto Destino">
-	      		</div>
-	      		<div class="col-6 mt-2">
-	      			 <input class="form-control viaje-container__numeroId" type="text" id="travelDescription" placeholder="Compania">
-	      		</div>
-	      		<div class="col-6 mt-2">
-	      			 <input class="form-control viaje-container__numeroId" type="text" id="travelDescription" placeholder="Numero de vuelo">
-	      		</div>
-	      		<div class="col-6 mt-2">
-	      			 <input class="form-control viaje-container__numeroId" type="number" id="travelDescription" placeholder="Tiempo escala en horas">
-	      		</div>
-	      		<div class="col-6 mt-2">
-	      			 <input class="form-control viaje-container__numeroId" type="number" id="travelDescription" placeholder="Tipo Avion">
-	      		</div>
-	      	
-	 
-	      		
-	      	</div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-	        <span class="btn btn-info viaje-container__btnViajeCrearPlan">Crear</span>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
-	
-	
-	 <!-- CARGAR VIAJE  -->
-    <div class="modal fade" id="modalViajeCargar" tabindex="-1">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="importType"></h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	<div class="row">
-	      		<div class="col-12">
-	      			
-	      			 <input type="file" class="form-control-file" id="importViaje">
-	      		</div>
-	      	</div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-	        <span class="btn btn-info viaje-container__btnViajeCargar">Confirmar</span>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
-	 <!-- MODAL USERSTATUS  -->
-    <div class="modal fade" id="modalUserStatus" tabindex="-1">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title">Mensaje</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body" id="userStatusContainer">
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-	       
-	      </div>
-	    </div>
-	  </div>
-	</div>
+                        </div>
 
-    
+                        <div class="col-6 mt-2">
+                            <input class="form-control viaje-container__numeroId" type="text" id="travelName" placeholder="Codigo reserva">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <input class="form-control viaje-container__numeroId" type="text" id="travelDescription" placeholder="Nombre">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <small class="text-muted">Fecha inicio</small>
+                            <input class="form-control viaje-container__numeroId" type="date" id="travelInitialDate" placeholder="Fecha inicio">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <small class="text-muted">Fecha fin</small>
+                            <input class="form-control viaje-container__numeroId" type="date" id="travelEndDate" placeholder="Fecha fin">
+                        </div>
+                        <div class="col-12 mt-4  ">
+                            <h6>En caso de ser un vuelo, completar los siguientes campos:</h6>
+                        </div>
+
+                        <div class="col-6 mt-2">
+                            <input class="form-control viaje-container__numeroId" type="text" id="travelDescription" placeholder="Aeropuerto Origen">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <input class="form-control viaje-container__numeroId" type="text" id="travelDescription" placeholder="Aeropuerto Destino">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <input class="form-control viaje-container__numeroId" type="text" id="travelDescription" placeholder="Compania">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <input class="form-control viaje-container__numeroId" type="text" id="travelDescription" placeholder="Numero de vuelo">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <input class="form-control viaje-container__numeroId" type="number" id="travelDescription" placeholder="Tiempo escala en horas">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <input class="form-control viaje-container__numeroId" type="number" id="travelDescription" placeholder="Tipo Avion">
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <span class="btn btn-info viaje-container__btnViajeCrearPlan">Crear</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- CARGAR VIAJE  -->
+    <div class="modal fade" id="modalViajeCargar" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importType"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <input type="file" class="form-control-file" id="importViaje">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <span class="btn btn-info viaje-container__btnViajeCargar">Confirmar</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL USERSTATUS  -->
+    <div class="modal fade" id="modalUserStatus" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Mensaje</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+                </div>
+                <div class="modal-body" id="userStatusContainer">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="js/home.js"></script>
 </body>
 
