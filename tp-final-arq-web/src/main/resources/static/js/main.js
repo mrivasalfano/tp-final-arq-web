@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const USUARIO = new Usuario();
 	const CRUDGENERICO = new CRUDGenerico('');
 	let importType = '';
+	let datosTempPlan = {};
 	
 	loadHTML();
 	
@@ -126,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					'fechaInicio': initialDate,
 					'fechaFin': endDate,
 				}
-				
+				console.log(data);
 				CRUDGENERICO.postModularAuthorization('viajes/', data,USUARIO.token).then(resp => {
 					$('#modalViajeCrear').modal('hide');
 					document.querySelector('.viajes-container__btn').click();
@@ -213,10 +214,24 @@ document.addEventListener("DOMContentLoaded", () => {
 				template += `<tr>`;
 				for(let e = 0; e<keys.length; e++){
 					const key = keys[e];
-					template += ` <td>${data[i][key]}</td>`;				
+					if(key === "planes") {
+//						template += `<td>`
+//						for(let u = 0; u < data[i][key].length; u++) {
+//							template += `${data[i][key][u].nombre} - `;																	
+//						}
+//						template += `</td>`
+//					    let objPlan = {};
+//						objPlan["id"] = data[i].id;
+//						objPlan["planes"] = data[i].planes; 
+						datosTempPlan[data[i].id] = data[i].planes;
+						console.log(datosTempPlan); 
+						template += `<td><button class="btn btn-success verMasPlanes" data-id="${data[i].id}">Ver más</button></td>`;
+					} else {		
+						template += ` <td>${data[i][key]}</td>`;				
+					}
 				}
 				template += `</tr>`;
-			}			
+			}
 		}
 		else {
 			template += `<tr>`;
@@ -231,6 +246,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		</table>`;
 		
 		elem.innerHTML = template;
+		
+		document.querySelectorAll(".verMasPlanes").forEach(btn => {
+			btn.addEventListener("click", e => {
+				console.log(datosTempPlan[btn.getAttribute("data-id")]);
+			});
+		});			
 	}
 	
 	function renderLogin(data){

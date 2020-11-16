@@ -106,6 +106,7 @@ public class ViajeController extends Controller {
     
     @PostMapping("/")
     public Viaje newViaje(@RequestBody Viaje v) {
+    	System.out.println("----------------------------------viaje: " + v);
         return repository.save(v);
     }
     
@@ -119,6 +120,8 @@ public class ViajeController extends Controller {
 			JSONObject jsonContent = new JSONObject(content);
 			Date f_inicio = Date.valueOf(jsonContent.getString("fechaInicio"));
 			Date f_fin = Date.valueOf(jsonContent.getString("fechaFin"));
+			System.out.println("1) upload-file-viaje: " + jsonContent.getString("fechaInicio") + jsonContent.getString("fechaFin") );
+			System.out.println("2) upload-file-viaje: " + f_inicio + f_fin);
 			String nom = jsonContent.getString("nombre");
 			String destino = jsonContent.getString("destino");
 			String descrip = jsonContent.getString("descripcionBreve");			
