@@ -22,13 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         document.querySelector('.viajes-container__btn').addEventListener('click', r => {
-            CRUDGENERICO.getModularAuthorization('viajes/', USUARIO.token).then(resp => {
-                console.log(resp);
-
-                renderList(resp);
-            }, err => {
-                console.log(err);
-            })
+            mostrarViajes();
         });
 
         document.querySelector('.viajes-container__btnId').addEventListener('click', r => {
@@ -95,7 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 CRUDGENERICO.postFormModularAuthorization(url, data, USUARIO.token).then(resp => {
                     console.log('Respuesta import bien', resp);
                     input.value = '';
+                    $('#modalViajeCargar').modal('hide');
+                    mostrarViajes();
                 }, err => {
+                    console.log(err);
                     alert('Error al importar.');
                 })
             } else {
@@ -124,8 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     'fechaInicio': initialDate,
                     'fechaFin': endDate,
                 }
-                console.log(data);
-                console.log(data);
 
                 CRUDGENERICO.postModularAuthorization('viajes/', data, USUARIO.token).then(resp => {
                     $('#modalViajeCrear').modal('hide');
@@ -155,34 +150,56 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         document.querySelector('.viaje-container__btnViajeCrearPlan').addEventListener('click', r => {
+            const name = document.querySelector('#travelDescription2').value;
+            const idViaje = document.querySelector('#selectViajes').value;
+            const codReserva = document.querySelector('#travelName2').value;
+            const initialDate = document.querySelector('#travelInitialDate2').value;
+            const endDate = document.querySelector('#travelEndDate2').value;
+            const aeropuertoOrigen = document.querySelector('#travelDescription3').value;
+            const aeropuertoLlegada = document.querySelector('#travelDescription4').value;
+            const compania = document.querySelector('#travelDescription5').value;
+            const numVuelo = document.querySelector('#travelDescription6').value;
+            const horasEscala = document.querySelector('#travelDescription7').value;
+            const tipoAvion = document.querySelector('#travelDescription8').value;
 
+            if ((selectViajes == -1) || (name == '') || (codReserva == '') || (initialDate == '') || (endDate == '')) {
+                alert('Verifique los datos ingresados');
+            } else {
+                let data = {
+                    'nombre': name,
+                    'fechaInicio': initialDate,
+                    'fechaFin': endDate,
+                    'codigoReserva': codReserva,
+                    'idViaje': idViaje
+                }
 
-            //			const name = document.querySelector('#travelName').value;
-            //			const description = document.querySelector('#travelDescription').value;
-            //			const destination = document.querySelector('#travelDestination').value;
-            //			const initialDate = document.querySelector('#travelInitialDate').value;	
-            //			const endDate = document.querySelector('#travelEndDate').value;
-            //			
-            //			if((name == '')||(description == '')||(destination == '')||(initialDate == '')||(endDate == '')){
-            //				alert('Verifique los datos ingresados');
-            //			}
-            //			else {
-            //				const data = {
-            //					'nombre': name,
-            //					'descripcionBreve': description,
-            //					'destino': destination,
-            //					'fechaInicio': initialDate,
-            //					'fechaFin': endDate,
-            //				}
-            //				
-            //				CRUDGENERICO.postModularAuthorization('viajes/', data,USUARIO.token).then(resp => {
-            //					$('#modalViajeCrear').modal('hide');
-            //					document.querySelector('.viajes-container__btn').click();
-            //				}, err => {
-            //						alert('Error al crear viaje.');											
-            //				})		
-            //				
-            //			}
+                let ruta = 'planes/';
+
+                if (aeropuertoOrigen != '' || aeropuertoLlegada != '' || compania != '' || numVuelo != '' || horasEscala != '' || tipoAvion != '') {
+                    if (aeropuertoOrigen != '' && aeropuertoLlegada != '' && compania != '' && numVuelo != '' && horasEscala != '' && tipoAvion != '') {
+                        ruta = 'planes/vuelos/';
+                        data['aeropuertoSalida'] = aeropuertoOrigen;
+                        data['aeropuertoLlegada'] = aeropuertoLlegada;
+                        data['tipoAvion'] = tipoAvion;
+                        data['tiempoEscalaMin'] = horasEscala;
+                        data['compania'] = compania;
+                        data['numVuelo'] = numVuelo;
+                    } else {
+                        alert('Faltan datos del vuelo');
+                        return;
+                    }
+                }
+
+                console.log(data);
+                CRUDGENERICO.postModularAuthorization(ruta, data, USUARIO.token).then(resp => {
+                    console.log(resp);
+                    $('#modalViajeCrearPlan').modal('hide');
+                    mostrarViajes();
+                }, err => {
+                    alert('Error al crear viaje.');
+                })
+
+            }
         });
 
 
@@ -318,6 +335,15 @@ document.addEventListener("DOMContentLoaded", () => {
             renderLogin(data);
         });
 
+    }
+
+    function mostrarViajes() {
+        CRUDGENERICO.getModularAuthorization('viajes/', USUARIO.token).then(resp => {
+            console.log(resp);
+            renderList(resp);
+        }, err => {
+            console.log(err);
+        })
     }
 
 });

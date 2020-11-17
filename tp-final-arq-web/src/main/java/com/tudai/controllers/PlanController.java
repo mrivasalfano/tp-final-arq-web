@@ -91,12 +91,26 @@ public class PlanController extends Controller {
 
 	@PostMapping("/")
 	public Plan newPlan(@RequestBody Plan p) {
-		return repository.save(p);
+		Optional<Viaje> v = vrepository.findById(p.getIdViaje());
+		
+		if (v.isPresent()) {
+			p.setViaje(v.get());
+			return repository.save(p);
+		}
+		
+		return null;
 	}
 
 	@PostMapping("/vuelos")
 	public Plan newPlanVuelo(@RequestBody PlanVuelo pv) {
-		return repository.save(pv);
+		Optional<Viaje> v = vrepository.findById(pv.getIdViaje());
+		
+		if (v.isPresent()) {
+			pv.setViaje(v.get());
+			return repository.save(pv);
+		}
+		
+		return null;
 	}
 
 	@PutMapping("/vuelos/{id}")
@@ -147,9 +161,9 @@ public class PlanController extends Controller {
 			Date f_inicio = Date.valueOf(jsonContent.getString("fechaInicio"));
 			Date f_fin = Date.valueOf(jsonContent.getString("fechaFin"));
 			// buscar viaje por fecha
-			System.out.println("HOLAAA "+f_inicio+" "+f_fin);
+			System.out.println("getViajeByFecha: " + f_inicio+" "+f_fin+" "+(Integer) SecurityContextHolder.getContext().getAuthentication().getDetails());
 			Viaje v = vrepository.getViajeByFecha(f_inicio, f_fin, (Integer) SecurityContextHolder.getContext().getAuthentication().getDetails());
-			System.out.println(v);
+			System.out.println("viaje response: " + v);
 			if(v != null){
 				System.out.println("Encontro viaje");
 				Plan p = null;
