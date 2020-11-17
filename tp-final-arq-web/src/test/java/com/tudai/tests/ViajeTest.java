@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNull;
 
 import java.sql.Date;
 
-import org.junit.After;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,21 +23,15 @@ public class ViajeTest {
 	@Autowired
 	UsuarioRepository usuarioRepository;
 	
-	private Usuario usuario;
-	private Viaje viaje;
-	
 	@Test
-	@Order(value = 1)
 	public void crearUsuarioTest() {
 		Usuario u = new Usuario("testing", "1234");
 		usuarioRepository.save(u);
-		this.usuario = u;
 		
 		assertNotNull(u);
 	}
 	
 	@Test
-	@Order(value = 2)
 	public void crearViajeTest() {
 		Viaje v = new Viaje("Viaje desde test", "Testing", 
 		           new Date(1604199600000L), //01/11/2020
@@ -47,7 +40,6 @@ public class ViajeTest {
 			);
 		
 		Viaje vSave = repository.save(v);
-		repository.delete(vSave);
 		
 		assertNotNull(vSave);
 	}
@@ -66,8 +58,8 @@ public class ViajeTest {
 		
 		Viaje vSave = repository.save(v);
 		
-		Viaje vFecha = repository.getViajeByFecha(new Date(1606532400000L), 
-				                                  new Date(1604199600000L), 
+		Viaje vFecha = repository.getViajeByFecha(new Date(1604545200000L), 
+				                                  new Date(1604545200000L), 
 				                                  vSave.getUsuario().getId());
 		
 		assertNotNull(vFecha);
@@ -87,10 +79,10 @@ public class ViajeTest {
 		
 		Viaje vSave = repository.save(v);
 		
-		Viaje vFecha = repository.getViajeByFecha(new Date(1604286000000L), 
-                								  new Date(1604286000000L), 
+		Viaje vFecha = repository.getViajeByFecha(new Date(1609210800000L), 
+                								  new Date(1609210800000L), 
                 								  vSave.getUsuario().getId());
-		
-		assert(vFecha == null);
+		assertNull(vFecha);
 	}
+	
 }

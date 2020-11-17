@@ -106,8 +106,13 @@ public class ViajeController extends Controller {
     
     @PostMapping("/")
     public Viaje newViaje(@RequestBody Viaje v) {
-    	System.out.println("----------------------------------viaje: " + v);
-        return repository.save(v);
+		int idUsu = (Integer) SecurityContextHolder.getContext().getAuthentication().getDetails();
+		Optional<Usuario> u = usuRepository.findById(idUsu);
+		if(u.isPresent()) {
+			v.setUsuario(u.get());
+			return repository.save(v);
+		}
+		return null;
     }
     
     @PostMapping("/upload-file")

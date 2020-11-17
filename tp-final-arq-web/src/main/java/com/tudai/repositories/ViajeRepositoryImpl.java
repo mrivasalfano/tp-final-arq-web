@@ -35,14 +35,14 @@ public class ViajeRepositoryImpl implements ViajeRepositoryCustom {
 	public List<ReporteUsuMasViajes> getReporteConMasViajes() {
 		//Lista sql
 		List<Object[]> listadoClientesVentas = em.createQuery(""
-				+ "SELECT v.destino, v.usuario.nombre, COUNT(*) AS cantidad "
+				+ "SELECT v.usuario.nombre, COUNT(*) AS cantidad "
 				+ "FROM Viaje v GROUP BY v.usuario.id ORDER BY cantidad DESC").getResultList();
 //		Liste reporte
 		List<ReporteUsuMasViajes> reporte = new ArrayList<ReporteUsuMasViajes>();
 		
 		ReporteUsuMasViajes reporteTemp;
 		for (Object[] item : listadoClientesVentas) {
-			reporteTemp = new ReporteUsuMasViajes((String) item[1], ((Long)item[2]));
+			reporteTemp = new ReporteUsuMasViajes((String) item[0], ((Long)item[1]));
 			reporte.add(reporteTemp);			
 		}
 		return reporte;

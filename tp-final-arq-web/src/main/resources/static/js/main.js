@@ -230,18 +230,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 for (let e = 0; e < keys.length; e++) {
                     const key = keys[e];
                     if (key === "planes") {
-                        //						template += `<td>`
-                        //						for(let u = 0; u < data[i][key].length; u++) {
-                        //							template += `${data[i][key][u].nombre} - `;																	
-                        //						}
-                        //						template += `</td>`
-                        //					    let objPlan = {};
-                        //						objPlan["id"] = data[i].id;
-                        //						objPlan["planes"] = data[i].planes; 
                         datosTempPlan[data[i].id] = data[i].planes;
-                        console.log(datosTempPlan);
                         template += `<td><button class="btn btn-success verMasPlanes" data-id="${data[i].id}">Ver más</button></td>`;
-                    } else {
+                    } else if (key === "usuario") {
+                        template += ` <td>${data[i][key].nombre}</td>`;						
+					} else {
                         template += ` <td>${data[i][key]}</td>`;
                     }
                 }
@@ -339,7 +332,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function mostrarViajes() {
         CRUDGENERICO.getModularAuthorization('viajes/', USUARIO.token).then(resp => {
-            console.log(resp);
             renderList(resp);
         }, err => {
             console.log(err);
