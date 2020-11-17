@@ -1,13 +1,13 @@
 {
         "nombre": "VIAJE CREADO TXT WEBB",
         "destino": "Miami",
-        "fechaInicio": "2020-11-01",
-        "fechaFin": "2020-11-28",
+        "fechaInicio": "2021-01-01",
+        "fechaFin": "2021-01-28",
         "descripcionBreve": "hola txt vacaciones",
 	"planVuelo": {
 		"nombre": "vuelo txt",
-		"fechaInicio": "2020-11-12",
-		"fechaFin": "2020-11-13",
+		"fechaInicio": "2021-01-12",
+		"fechaFin": "2021-01-13",
 		"codigoReserva": "5578",
 		"numVuelo": 2154,
 		"compania": "Despegar",

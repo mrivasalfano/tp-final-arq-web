@@ -1,6 +1,6 @@
 {
 	"nombre": "Hotel.txt web",
-        "fechaInicio": "2020-12-12",
-        "fechaFin": "2020-12-14",
+        "fechaInicio": "2020-11-12",
+        "fechaFin": "2020-11-14",
         "codigoReserva": "5578"
 }

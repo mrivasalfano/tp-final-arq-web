@@ -1,7 +1,7 @@
 {
 	"nombre": "Vuelo WEBBB aeolineas.txt",
-        "fechaInicio": "2020-11-12",
-        "fechaFin": "2020-11-13",
+        "fechaInicio": "2020-11-01",
+        "fechaFin": "2020-11-02",
         "codigoReserva": "5578",
         "numVuelo": 2154,
         "compania": "Despegar",
