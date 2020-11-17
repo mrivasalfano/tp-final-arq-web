@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TpFinalArqWebApplication {
 
 	public static void main(String[] args) {
-		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC")); //necesario para mantener coordinada las fechas de envio por el cliente al servidor
 		SpringApplication.run(TpFinalArqWebApplication.class, args);
 	}
 
