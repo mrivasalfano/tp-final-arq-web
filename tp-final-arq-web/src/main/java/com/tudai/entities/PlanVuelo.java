@@ -8,6 +8,10 @@ import javax.persistence.Entity;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * Es un tipo de plan porque incluye sus datos pero agrega
+ * otros que corresponden a un vuelo.
+ */
 @Entity
 @Data
 @ToString(callSuper = true)

@@ -60,23 +60,6 @@ public class UsuarioController extends Controller {
     public Optional<Usuario> getUsuario(@PathVariable int id) {
     	return repository.findById(id);
     }
-
-    //queda ver la clase de Juan de como implementarlo
-//    @RequestMapping(value="/login",
-//            method=RequestMethod.POST,
-//            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-//	public String createRole(@RequestBody MultiValueMap<String, String> formData){
-//		String nombre = formData.getFirst("usuario");
-//		String contraseña = formData.getFirst("contraseña");
-//		System.out.println(formData);
-//		Usuario usu = repository.findByName(nombre);
-//		if(usu != null) {
-//			System.out.println(usu.getContraseña().equals(contraseña));
-//		}
-//		System.out.println("USUARIO syso: " + usu);
-//    	return null;
-//	}
-    
         
     @PostMapping("/")
     public Usuario newUsuario(@RequestBody Usuario u) {
@@ -116,6 +99,12 @@ public class UsuarioController extends Controller {
     	}
     }
     
+    /**
+     * Recibe un usuario y verifica sus credenciales. En caso
+     * de que estén correctas genera un Token
+     * @param u usuario que se quiere logear
+     * @return string con Token, nombre de usuario y estado
+     */
     @PostMapping("/authentication")
     public String authentication(@RequestBody Usuario u){
     	Usuario usu = repository.findByName(u.getNombre());
@@ -133,6 +122,7 @@ public class UsuarioController extends Controller {
 				.commaSeparatedStringToAuthorityList(roles);    		
     	
 		JSONObject resp = new JSONObject();
+		resp.put("status", "Error");
 		if(usu != null) {
 			if(this.passwordEncoder.matches(u.getClave(), usu.getClave())) {
 				String token = Jwts.builder()
@@ -152,12 +142,6 @@ public class UsuarioController extends Controller {
 				resp.put("token", "Bearer " + token);
 				resp.put("status", "Success");
 			}
-			else {
-				resp.put("status", "Error");
-			}
-		}
-		else {
-			resp.put("status", "Error");			
 		}
 		return resp.toString();
 	}
