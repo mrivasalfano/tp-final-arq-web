@@ -5,17 +5,23 @@ import static org.junit.Assert.assertNull;
 
 import java.sql.Date;
 
-import org.junit.jupiter.api.Order;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.tudai.controllers.UsuarioController;
 import com.tudai.entities.Usuario;
 import com.tudai.entities.Viaje;
 import com.tudai.repositories.UsuarioRepository;
 import com.tudai.repositories.ViajeRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @SpringBootTest
+@Slf4j
 public class ViajeTest {
 	@Autowired
 	ViajeRepository repository;
@@ -23,8 +29,26 @@ public class ViajeTest {
 	@Autowired
 	UsuarioRepository usuarioRepository;
 	
+	static Usuario uNuevo;
+	
+    @BeforeAll
+    public static void init() {
+        log.info("startup");
+        System.out.println("---------------------BEFORE");
+//        list = new ArrayList<>(Arrays.asList("test1", "test2"));
+		uNuevo = new Usuario("Nuevo", "1234");
+    }
+ 
+    @After
+    public void finalize() {
+        log.info("finalize");
+//        list.clear();
+    }
+	
 	@Test
 	public void crearUsuarioTest() {
+		System.out.println("---------------------step: 0");
+		System.out.println("----------- uNuevo: " + uNuevo);
 		Usuario u = new Usuario("testing", "1234");
 		usuarioRepository.save(u);
 		
@@ -33,6 +57,7 @@ public class ViajeTest {
 	
 	@Test
 	public void crearViajeTest() {
+		System.out.println("---------------------step: 1");
 		Viaje v = new Viaje("Viaje desde test", "Testing", 
 		           new Date(1604199600000L), //01/11/2020
 		           new Date(1606532400000L), //28/12/2020 
@@ -46,6 +71,7 @@ public class ViajeTest {
 	
 	@Test
 	public void getViajeRangoFecha() {
+		System.out.println("---------------------step: 2");
 		Usuario u = new Usuario("testing", "1234");
 		usuarioRepository.save(u);
 		
@@ -67,6 +93,7 @@ public class ViajeTest {
 	
 	@Test
 	public void getViajeRangoFechaInvalido() {
+		System.out.println("---------------------step: 3");
 		Usuario u = new Usuario("testing", "1234");
 		usuarioRepository.save(u);
 		
