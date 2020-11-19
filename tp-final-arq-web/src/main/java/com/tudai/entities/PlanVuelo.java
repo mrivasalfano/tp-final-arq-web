@@ -6,9 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
+@ToString(callSuper = true)
 public class PlanVuelo extends Plan{
 
 	@Column
@@ -38,6 +40,15 @@ public class PlanVuelo extends Plan{
 		this.aeropuertoSalida = aeropuertoSalida;
 		this.aeropuertoLlegada = aeropuertoLlegada;
 	}
+
+//	@Override
+//	public String toString() {
+//		return "PlanVuelo [numVuelo=" + numVuelo + ", compania=" + compania + ", tiempoEscalaMin=" + tiempoEscalaMin
+//				+ ", tipoAvion=" + tipoAvion + ", aeropuertoSalida=" + aeropuertoSalida + ", aeropuertoLlegada="
+//				+ aeropuertoLlegada + ", nombre=" + nombre + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin
+//				+ ", codigoReserva=" + codigoReserva + ", idViaje=" + idViaje + "]";
+//	}
+	
 	
 	
 	

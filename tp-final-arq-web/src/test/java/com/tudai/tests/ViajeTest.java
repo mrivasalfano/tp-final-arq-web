@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.tudai.entities.Usuario;
 import com.tudai.entities.Viaje;
+import com.tudai.repositories.PlanRepository;
 import com.tudai.repositories.UsuarioRepository;
 import com.tudai.repositories.ViajeRepository;
 import com.tudai.utils.DateToMilli;
@@ -35,6 +36,9 @@ class ViajeTest {
 	@Autowired
 	UsuarioRepository userRepo;
 	
+	@Autowired
+	PlanRepository planRepo;
+	
 	public Usuario uSeba;
 	public Usuario uLucho;
 	public Usuario uTest;
@@ -46,7 +50,11 @@ class ViajeTest {
 	
     @BeforeEach
     public void init() {
-        System.out.println("---------------------BEFORE");
+    	planRepo.deleteAll();
+    	viajeRepo.deleteAll();
+    	userRepo.deleteAll();	
+    	
+        System.out.println("\n---------------------BEFORE");
         uSeba = new Usuario("Seba", "$2a$10$96aLmAt8Mlhmjw7HBLilGezX1Gw3/w8kIpmLicK/8xnPgG0hTg9qW"); //pass: 1234
 		uLucho = new Usuario("Lucho", "$2a$10$96aLmAt8Mlhmjw7HBLilGezX1Gw3/w8kIpmLicK/8xnPgG0hTg9qW"); //pass: 1234
 		uTest = new Usuario("testing", "$2a$10$96aLmAt8Mlhmjw7HBLilGezX1Gw3/w8kIpmLicK/8xnPgG0hTg9qW"); //pass: 1234
@@ -100,17 +108,14 @@ class ViajeTest {
     public void finalize() {
         System.out.println("---------------------AFTER");
 		
-        viajeRepo.delete(v1);
-        viajeRepo.delete(v2);
-        viajeRepo.delete(v3);
-        viajeRepo.delete(v4);
-		userRepo.delete(uLucho);
-		userRepo.delete(uSeba);
+    	planRepo.deleteAll();
+    	viajeRepo.deleteAll();
+    	userRepo.deleteAll();	
     }
 
 	@Test
 	void testGetReporteConMasViajes() {
-		System.out.println("------------------------------step: 1");
+		System.out.println("Test 1 ------------------------------testGetReporteConMasViajes()");
 		
 		List<ReporteUsuMasViajes>  reporteMasViajes= viajeRepo.getReporteConMasViajes();
 
@@ -119,7 +124,7 @@ class ViajeTest {
 
 	@Test
 	void testGetReporteConZona() {
-		System.out.println("------------------------------step: 2");
+		System.out.println("Test 2 ------------------------------testGetReporteConZona()");
 		
 		List<ReporteConMasZonas>  reporteMasZona= viajeRepo.getReporteConZona();
 
@@ -129,7 +134,7 @@ class ViajeTest {
 	
 	@Test
 	public void crearViajeTest() {
-		System.out.println("---------------------step: 3");
+		System.out.println("Test 3 ---------------------crearViajeTest()");
 		Viaje v = new Viaje("Viaje desde test", "Testing", 
 		           new Date(DateToMilli.getDate("2020/11/01")),
 		           new Date(DateToMilli.getDate("2020/12/28")),
@@ -143,7 +148,7 @@ class ViajeTest {
 	
 	@Test
 	public void getViajeRangoFecha() {
-		System.out.println("---------------------step: 4");
+		System.out.println("Test 4 ---------------------getViajeRangoFecha()");
 		
 		Viaje vSave = viajeRepo.save(v5);
 		Viaje vFecha = viajeRepo.getViajeByFecha(new Date(DateToMilli.getDate("2020/11/05")), 
@@ -154,7 +159,7 @@ class ViajeTest {
 	
 	@Test
 	public void getViajeRangoFechaInvalido() {
-		System.out.println("---------------------step: 5");
+		System.out.println("Test 5 ---------------------getViajeRangoFechaInvalido()");
 		
 		Viaje vSave = viajeRepo.save(v5);
 		Viaje vFecha = viajeRepo.getViajeByFecha(new Date(DateToMilli.getDate("2020/12/29")), 
