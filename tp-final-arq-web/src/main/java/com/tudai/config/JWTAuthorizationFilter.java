@@ -23,9 +23,10 @@ import io.jsonwebtoken.UnsupportedJwtException;
 
 
 /**
- * Se encarga de crear y validar Tokens 
- * @author HP-Lucho
- *
+ * Se encarga de crear y validar Tokens
+ * @author Team-Bolivar
+ * @version v1.0
+ * @since   2020-11-24
  */
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 

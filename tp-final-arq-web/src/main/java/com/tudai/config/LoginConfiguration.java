@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * dejar algunas rutas libre de autorización
  * @author Team-Bolivar
  * @version v1.0
- * @since   2020-11-17
+ * @since   2020-11-24
  */
 @EnableWebSecurity
 @Configuration

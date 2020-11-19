@@ -36,6 +36,13 @@ import com.tudai.repositories.ViajeRepository;
 import com.tudai.utils.ReporteConMasZonas;
 import com.tudai.utils.ReporteUsuMasViajes;
 
+/**
+ * Rest Controller de viajes. Se encarga de recibir
+ * peticiones HTTP del cliente, realizar procesos y responder.
+ * @author Team-Bolivar
+ * @version v1.0
+ * @since   2020-11-24
+ */
 @RestController
 @RequestMapping("/viajes")
 public class ViajeController extends Controller {

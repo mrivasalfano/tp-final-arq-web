@@ -30,7 +30,13 @@ import com.tudai.repositories.UsuarioRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-
+/**
+ * Rest Controller de usuarios. Se encarga de recibir
+ * peticiones HTTP del cliente, realizar procesos y responder.
+ * @author Team-Bolivar
+ * @version v1.0
+ * @since   2020-11-24
+ */
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController extends Controller {
