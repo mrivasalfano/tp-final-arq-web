@@ -34,4 +34,4 @@ En cuanto al despliegue, todo el backend se encuentra en un mismo nodo, es decir
 
 Por último se mostrará un diagrama que ejemplifica una alta de viaje mediante un archivo **.json** 
 ### Diagrama de secuencia
-![Diagrama de secuencia](/tp-final-arq-web/images/diagrama_secuencia.png)
+![Diagrama de secuencia](/tp-final-arq-web/images/diagrama_secuencia_cargar_viaje_archivo.png)
