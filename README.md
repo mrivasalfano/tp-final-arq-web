@@ -2,13 +2,15 @@
 ## TUDAI - 2020
 
 La solución empezó con la identifición de las entidades. La siguiente imágen muestra las tablas finales.
-#### Diagrama de entidades y relaciones
-![DER](/tp-final-arq-web/images/DER.png)
 
+#### Diagrama de entidades y relaciones
 Identificamos un plan distinto a los "comunes" que sería el plan vuelo. Este tiene datos adicionales por lo tanto es una herencia de Plan.
 
-A nivel de módulos se cuenta con 5 paquetes para el backend
+![DER](/tp-final-arq-web/images/DER.png)
+
 #### Vista de módulos
+A nivel de módulos se cuenta con 5 paquetes para el backend
+
 ![Vista de módulos](/tp-final-arq-web/images/vista_modulos.png)
 
 - Frontend: Interfaz WEB basada en HTML, CSS, Bootstrap y JavaScript. Permite logearse y realizar peticiones a la API.
@@ -18,8 +20,9 @@ A nivel de módulos se cuenta con 5 paquetes para el backend
 - Config: Configuraciones de Swagger, JWT y filtro de rutas con autorización.
 - Utils: Contiene POJO's para convertir fechas, almacenar reportes e inicializar datos de prueba.
 
-El sistema en funcionamienta corre de la siguiente manera
 #### Vista de C&C y despliegue
+El sistema en funcionamienta corre de la siguiente manera
+
 ![Vista de C&C y despliegue](/tp-final-arq-web/images/vista_cc_despliegue.png)
 
 1- Un cliente realiza una petición **REST** al servidor mediante un **ENDPOINT**  
