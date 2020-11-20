@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 
@@ -117,6 +119,7 @@ public class PlanController extends Controller {
 	}
 
 	@PostMapping("/")
+	@PreAuthorize("hasAuthority('USER')")
 	public Plan newPlan(@RequestBody Plan p) {
 		Optional<Viaje> v = vrepository.findById(p.getIdViaje());
 		
@@ -129,6 +132,7 @@ public class PlanController extends Controller {
 	}
 
 	@PostMapping("/vuelos")
+	@PreAuthorize("hasAuthority('USER')")
 	public Plan newPlanVuelo(@RequestBody PlanVuelo pv) {
 		Optional<Viaje> v = vrepository.findById(pv.getIdViaje());
 		
