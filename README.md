@@ -21,7 +21,7 @@ A nivel de módulos la aplicación está dividida de la siguiente manera.
 - Utils: Contiene POJO's para convertir fechas, almacenar reportes e inicializar datos de prueba.
 
 ### Vista de C&C y despliegue
-El sistema en funcionamienta corre de la siguiente manera
+El sistema en funcionamiento corre de la siguiente manera
 
 ![Vista de C&C y despliegue](/tp-final-arq-web/images/vista_cc_despliegue.png)
 
