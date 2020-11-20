@@ -191,7 +191,6 @@ public class ViajeController extends Controller {
 				planRepository.save(p);
 	    		this.responseStatus(200, response);
 			} else {
-//				response.sendRedirect("/");
 	    		this.responseStatus(404, response);
 			}
 			
