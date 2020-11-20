@@ -34,4 +34,4 @@ En cuanto al despliegue, todo el backend se encuentra en un mismo nodo, es decir
 
 Por último se mostrará un diagrama que ejemplifica una alta de viaje mediante un archivo **.json** 
 ### Diagrama de secuencia
-![Vista de C&C y despliegue](/tp-final-arq-web/images/vista_cc_despliegue.png)
+![Diagrama de secuencia](/tp-final-arq-web/images/diagrama_secuencia.png)
