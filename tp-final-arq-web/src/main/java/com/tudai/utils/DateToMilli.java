@@ -3,6 +3,12 @@ package com.tudai.utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * Convierte strings de fechas a milisegundos
+ * @author Team-Bolivar
+ * @version v1.0
+ * @since   2020-11-24
+ */
 public class DateToMilli {
 
     /**

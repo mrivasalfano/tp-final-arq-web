@@ -33,6 +33,13 @@ import com.tudai.entities.Viaje;
 import com.tudai.repositories.PlanRepository;
 import com.tudai.repositories.ViajeRepository;
 
+/**
+ * Rest Controller de Planes. Se encarga de recibir
+ * peticiones HTTP del cliente, realizar procesos y responder.
+ * @author Team-Bolivar
+ * @version v1.0
+ * @since   2020-11-24
+ */
 @RestController
 @RequestMapping("/planes")
 public class PlanController extends Controller {
@@ -52,7 +59,6 @@ public class PlanController extends Controller {
 	}
 
 	@GetMapping("/")
-	//    @JsonView(Views.PlanConIdViaje.class)
 	public Iterable<Plan> getPlanes() {
 		return repository.findAll();
 	}
@@ -62,16 +68,32 @@ public class PlanController extends Controller {
 		return repository.findById(id);
 	}
 
+	/**
+	 * Retorna los planes pendientes, es decir cuya fecha
+	 * sea mayor a la actual
+	 * @return lista de planes
+	 */
 	@GetMapping("/pendientes")
 	public List<Plan> getPlanesPendiente() {
 		return repository.getAllPendiente();
 	}
 
+	/**
+	 * Retorna los planes realizados, es decir cuya fecha
+	 * sea menor a la actual
+	 * @return lista de planes
+	 */
 	@GetMapping("/realizados")
 	public List<Plan> getPlanesRealizados() {
 		return repository.getAllRealizado();
 	}
 
+	/**
+	 * Retorna los planes que estén dentro del rango
+	 * de fecha inicio y fecha fin
+	 * @param json con fecha inicia y fecha fin
+	 * @return lista de planes
+	 */
 	@PostMapping("/periodo")
 	public List<Plan> getPlanesRangoFecha(@RequestBody JsonNode json) {
 		Date fechaIni = Date.valueOf(json.get("fechaIni").asText());
@@ -82,6 +104,11 @@ public class PlanController extends Controller {
 			return null;
 	}
 
+	/**
+	 * Retorna los planes cuyo viaje esté en el destino especifidado
+	 * @param json con la zona geográfica
+	 * @return lista de planes
+	 */
 	@PostMapping("/zona")
 	public List<Plan> getPlanesZonaGeografica(@RequestBody JsonNode json) {
 		String zona = json.get("zonaGeografica").asText();
@@ -154,6 +181,13 @@ public class PlanController extends Controller {
 		}
 	}
 
+	/**
+	 * Guarda el plan común o plan vuelo según los datos
+	 * que contenga el file
+	 * @param file archivo .json con datos del plan a crear
+	 * @param response HTTP con status
+	 * @return plan creado
+	 */
 	@PostMapping("/upload-plan")	
 	public Plan uploadFile(@RequestParam("file") MultipartFile file, HttpServletResponse response) {
 		String content = null;

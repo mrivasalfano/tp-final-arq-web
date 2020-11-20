@@ -19,8 +19,10 @@ import com.tudai.repositories.UsuarioRepository;
 import com.tudai.repositories.ViajeRepository;
 
 /**
- * Inicializa datos de testing
- * @author tudai bolivar
+ * Inicializa datos de prueba
+ * @author Team-Bolivar
+ * @version v1.0
+ * @since   2020-11-24
  */
 @Component
 @Slf4j

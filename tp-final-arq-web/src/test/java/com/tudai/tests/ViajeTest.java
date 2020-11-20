@@ -23,9 +23,9 @@ import com.tudai.utils.ReporteUsuMasViajes;
 
 /**
  * Pruebas del correcto funcionamiento de viaje
- * @author  teamBolivar
+ * @author Team-Bolivar
  * @version v1.0
- * @since   2020-11-27
+ * @since   2020-11-24
  */
 @SpringBootTest
 class ViajeTest {

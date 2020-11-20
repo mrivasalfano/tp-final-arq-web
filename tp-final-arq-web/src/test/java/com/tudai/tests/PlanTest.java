@@ -22,9 +22,9 @@ import com.tudai.utils.DateToMilli;
 
 /**
  * Pruebas del correcto funcionamiento de Plan
- * @author  teamBolivar
+ * @author Team-Bolivar
  * @version v1.0
- * @since   2020-11-27
+ * @since   2020-11-24
  */
 @SpringBootTest
 class PlanTest {

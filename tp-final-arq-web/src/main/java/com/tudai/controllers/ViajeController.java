@@ -36,6 +36,13 @@ import com.tudai.repositories.ViajeRepository;
 import com.tudai.utils.ReporteConMasZonas;
 import com.tudai.utils.ReporteUsuMasViajes;
 
+/**
+ * Rest Controller de viajes. Se encarga de recibir
+ * peticiones HTTP del cliente, realizar procesos y responder.
+ * @author Team-Bolivar
+ * @version v1.0
+ * @since   2020-11-24
+ */
 @RestController
 @RequestMapping("/viajes")
 public class ViajeController extends Controller {
@@ -69,19 +76,32 @@ public class ViajeController extends Controller {
     	return repository.findById(id);
     }
     
+    /**
+     * Genera un reporte de los usuarios que más viajan
+     * @return lista con reporte
+     */
     @GetMapping("/reporte")
     @PreAuthorize("hasAuthority('ADMIN')")
     public List<ReporteUsuMasViajes> getUsuariosConMasViajes() {
     	return repository.getReporteConMasViajes();
     }
     
-    
+    /**
+     * Genera un reporte de las zonas más visitadas
+     * @return lista con reporte
+     */
     @GetMapping("/reporte-zona")
     @PreAuthorize("hasAuthority('ADMIN')")
     public List<ReporteConMasZonas> getViajeConMasZonas() {
     	return repository.getReporteConZona();
     }
     
+    /**
+     * Retorna los viajes pendientes o realizados según el estado
+     * que se le pase
+     * @param estado pendiente o realizado
+     * @return viaje
+     */
     @GetMapping("/reporte-estado/{estado}")
     public List<Viaje> getViajeEstado(@PathVariable String estado) {
     	if (estado.equals("pendiente")) {
@@ -94,8 +114,14 @@ public class ViajeController extends Controller {
     	
     }
     
+    /**
+     * Retorna lista de viajes que estén en el rango
+     * de fecha inicio y fin
+     * @param json
+     * @return lista de viajes
+     */
     @PostMapping("/reporte-periodo")
-	public List<Viaje> getPlanesRangoFecha(@RequestBody JsonNode json) {
+	public List<Viaje> getViajesRangoFecha(@RequestBody JsonNode json) {
 		Date fechaIni = Date.valueOf(json.get("fechaIni").asText());
 		Date fechaFin = Date.valueOf(json.get("fechaFin").asText());
 		if(fechaIni != null && fechaFin != null)
@@ -117,8 +143,15 @@ public class ViajeController extends Controller {
 		return null;
     }
     
+    /**
+     * Recibe un archivo json con datos de un viaje y un plan vuelo. El
+     * método se encarga de crear el viaje, crear el plan y asociarlos.
+     * @param file archivo .json con datos para crear viaje y plan
+     * @param response HTTP con status
+     * @return viaje
+     */
     @PostMapping("/upload-file")
-    public Viaje newViaje(@RequestParam("file") MultipartFile file, HttpServletResponse response) { 
+    public Viaje newViajeFile(@RequestParam("file") MultipartFile file, HttpServletResponse response) { 
     	Viaje viaje = null;
         String content = null;
         
