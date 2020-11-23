@@ -51,23 +51,17 @@ class InitialDatabase implements CommandLineRunner{
     	uAdmin.makeAdmin();
     	log.info("Preloading User " + userRepo.save(uAdmin));
 		
-		Viaje v1 = new Viaje("Mis 40 en miami", "Miami", 
-//			new Date(System.currentTimeMillis()+(24L*60*60*1000*1)),
-//			new Date(System.currentTimeMillis()+(24L*60*60*1000*5)),
-	           new Date(1604199600000L), //01/11/2020
-	           new Date(1606532400000L), //28/12/2020 
-			"vacaciones en la costa"
+		Viaje v1 = new Viaje("Mis 40 en miami", "Miami",
+		           new Date(DateToMilli.getDate("2020/11/01")), 
+		           new Date(DateToMilli.getDate("2020/11/28")), 
+		           "vacaciones en la costa"
 		);
 		
-		Viaje v2 = new Viaje("JODA realizada", "Hawai", 
-//				new Date(System.currentTimeMillis()+(24L*60*60*1000*1)),
-//				new Date(System.currentTimeMillis()+(24L*60*60*1000*5)),
-		           new Date(System.currentTimeMillis()-(24L*60*60*1000*30)), 
-		           new Date(System.currentTimeMillis()-(24L*60*60*1000*20)),  
-				"vacaciones"
+		Viaje v2 = new Viaje("JODA realizada", "Hawai",
+		           new Date(DateToMilli.getDate("2020/01/10")), 
+		           new Date(DateToMilli.getDate("2020/01/25")),  
+		           "vacaciones"
 			);
-		
-
 		
 		v1.setUsuario(u);
 		v2.setUsuario(u);
@@ -78,24 +72,24 @@ class InitialDatabase implements CommandLineRunner{
 	
 		
 		Plan pVuelo = new PlanVuelo("Plan vuelo 1", 2154, "Despegar", 
-           new Date(System.currentTimeMillis()+(24L*60*60*1000*1)), 
-		   new Date(System.currentTimeMillis()+(24L*60*60*1000*2)), 
+           new Date(DateToMilli.getDate("2020/11/01")), 
+		   new Date(DateToMilli.getDate("2020/11/02")), 
        "5578", 0, "Volador", "Aeropuerto 1", "Aeropuerto 2", vs);
 
 		Plan planComun = new Plan("Plan Comun 1", 
-	        new Date(System.currentTimeMillis()+(24L*60*60*1000*2)), 
-	        new Date(System.currentTimeMillis()+(24L*60*60*1000*4)), 
+	        new Date(DateToMilli.getDate("2020/11/12")), 
+	        new Date(DateToMilli.getDate("2020/11/15")), 
         "1234", vs);
 
 		Plan pVuelo2 = new PlanVuelo("Plan vuelo 2", 1234, "Despegar", 
-           new Date(System.currentTimeMillis()+(24L*60*60*1000*4)), 
-           new Date(System.currentTimeMillis()+(24L*60*60*1000*5)), 
-       "1234", 0, "Volador 2", "Aeropuerto 2", "Aeropuerto 1", vs);
+           new Date(DateToMilli.getDate("2020/01/10")), 
+           new Date(DateToMilli.getDate("2020/01/12")), 
+       "1234", 0, "Volador 2", "Aeropuerto 2", "Aeropuerto 1", vs2);
 
 		Plan planComun2 = new Plan("Plan Comun 2", 
-	               new Date(System.currentTimeMillis()-(24L*60*60*1000*10)), 
-	               new Date(System.currentTimeMillis()), 
-	               "1234", vs);
+	               new Date(DateToMilli.getDate("2020/01/15")), 
+	               new Date(DateToMilli.getDate("2020/01/18")), 
+	               "1234", vs2);
 		
 		log.info("Preloading " + vs);
 		

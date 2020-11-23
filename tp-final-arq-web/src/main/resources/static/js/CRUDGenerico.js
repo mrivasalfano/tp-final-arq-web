@@ -88,10 +88,7 @@ class CRUDGenerico {
 	    if (response.ok) {
             return await response.json();		
 		} else {
-			console.log(response);
-            const error = await response.json();
-            return Promise.reject(error);
-			//return 'error';
+            return Promise.reject(response);
         }
     }
 }

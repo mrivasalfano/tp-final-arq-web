@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 
 		document.querySelector('.viajes-container__btn').addEventListener('click', r => {
-			mostrarViajes().then(() => botonerVerPlanes()).catch((err)=>console.log(err));
+			mostrarViajes().then(() => botonerVerPlanes()).catch((err) => console.log(err));
 		});
 
 		document.querySelector('.viajes-container__btnId').addEventListener('click', r => {
@@ -37,16 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
 			if (input.value != '') {
 				$('#modalViajeId').modal('hide');
 				mostrarViaje(input.value)
-				.then(() => {
-					botonerVerPlanes();
-				}).catch((err)=>console.log(err));
+					.then(() => {
+						botonerVerPlanes();
+					}).catch((err) => console.log(err));
 			}
 		});
 
 		document.querySelector('.viajes-container__btnReport').addEventListener('click', r => {
-			if(isAdmin) {
+			if (isAdmin) {
 				CRUDGENERICO.getModularAuthorization('viajes/reporte/', USUARIO.token).then(resp => {
 					console.log(resp);
+					const planesContainer = document.querySelector('.planes');
+					planesContainer.innerHTML = '';
 					renderList(resp);
 				}, err => {
 					console.log(err);
@@ -90,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					console.log('Respuesta import bien', resp);
 					input.value = '';
 					$('#modalViajeCargar').modal('hide');
-					mostrarViajes().then(() => botonerVerPlanes()).catch((err)=>console.log(err));
+					mostrarViajes().then(() => botonerVerPlanes()).catch((err) => console.log(err));
 				}, err => {
 					if (err.status === 406) {
 						document.querySelector('#userStatusContainer').innerHTML = `<p>No se encuentra viaje en dicha fecha</p>`;
@@ -134,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 				}, err => {
-						console.log(err);
+					console.log(err);
 				}).finally(() => {
 					document.querySelector('#travelName').value = "";
 					document.querySelector('#travelDescription').value = "";
@@ -163,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				console.log(err);
 			})
 		});
-		
+
 		function botonesVerPlanes() {
 			botonesVerMas.forEach(btn => {
 				if (btn.getAttribute("data-id") == resp.idViaje) {
@@ -217,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				CRUDGENERICO.postModularAuthorization(ruta, data, USUARIO.token).then(resp => {
 					console.log(resp);
 					$('#modalViajeCrearPlan').modal('hide');
-					mostrarViajes().then(() => botonerVerPlanes()).catch((err)=>console.log(err));
+					mostrarViajes().then(() => botonerVerPlanes()).catch((err) => console.log(err));
 
 				}, err => {
 					console.log(err);
@@ -279,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			template += `<tr>`;
 			for (let e = 0; e < keys.length; e++) {
 				const key = keys[e];
-				
+
 				if (key === "planes") {
 					datosTempPlan[data.id] = data.planes;
 					template += `<td><button class="btn btn-success verMasPlanes" data-id="${data.id}">Ver más</button></td>`;
@@ -361,19 +363,29 @@ document.addEventListener("DOMContentLoaded", () => {
 		USUARIO.getHome().then(r => {
 			renderHome(r);
 		}, err => {
-			const data = `<div class="container" style="height: 100vh; width: 100vw;">
-	        <div class="row h-100">
-	            <div class="col-auto h-100">
-	                <form action="usuarios/authentication" method="POST">
-	                    <h3 class="text-info">Login</h3>
-	                    <label for="">Usuario</label>
-	                    <input type="text" name="usuario" placeholder="ingrese su usuario">
-	                    <label for="">Contraseña</label>
-	                    <input type="text" name="clave" placeholder="Ingrese su contraseña">
-	                    <button class="btnLogin" type="submit">Enviar</button>
-	                </form>
-	            </div>
-	        </div>
+			const data = `
+			<div class="container">
+		        <div class="row h-100">
+		            <div class="col-auto h-100">
+		                <form action="usuarios/authentication" method="POST">
+		                    <h3 class="text-info">Login</h3>
+		                    <label for="">Usuario</label>
+		                    <input type="text" name="usuario" placeholder="ingrese su usuario">
+		                    <label for="">Contraseña</label>
+		                    <input type="password" name="clave" placeholder="Ingrese su contraseña">
+		                    <button class="btnLogin" type="submit">Enviar</button>
+		                </form>
+		            </div>
+		           <div class="card">
+		           	  <div class="card-header">
+		           	  	<h5 class="card-title">Usuarios disponibles</h5>
+		           	  </div>
+					  <div class="card-body">
+					    <p class="card-text"><strong>Usuario:</strong> admin <strong>Contraseña:</strong> 1234</p>
+					    <p class="card-text"><strong>Usuario:</strong> manu  <strong>Contraseña:</strong> 1234</p>
+					  </div>
+					</div>
+		        </div>      
 	    	</div>`;
 			renderLogin(data);
 		});
@@ -383,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function mostrarViaje(id) {
 		return new Promise((resolve, reject) => {
-			CRUDGENERICO.getModularAuthorization('viajes/'+id+'/', USUARIO.token).then(resp => {
+			CRUDGENERICO.getModularAuthorization('viajes/' + id + '/', USUARIO.token).then(resp => {
 				document.querySelector('.planes').innerHTML = '';
 				renderList(resp);
 				resolve();

@@ -1,5 +1,5 @@
 {
-	"nombre": "Hotel.txt web",
+	"nombre": "Hotel creado desde archivo JSON",
         "fechaInicio": "2020-11-12",
         "fechaFin": "2020-11-14",
         "codigoReserva": "5578"

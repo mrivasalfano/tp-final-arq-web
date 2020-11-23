@@ -1,5 +1,5 @@
 {
-	"nombre": "Vuelo WEBBB aeolineas.txt",
+	"nombre": "Vuelo cargado de archivo JSON",
         "fechaInicio": "2020-11-01",
         "fechaFin": "2020-11-02",
         "codigoReserva": "5578",

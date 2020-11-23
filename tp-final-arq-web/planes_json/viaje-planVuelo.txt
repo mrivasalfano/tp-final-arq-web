@@ -1,11 +1,11 @@
 {
-        "nombre": "VIAJE CREADO TXT WEBB",
+        "nombre": "Viaje creado desde Archivo JSON",
         "destino": "Miami",
         "fechaInicio": "2021-01-01",
         "fechaFin": "2021-01-28",
         "descripcionBreve": "hola txt vacaciones",
 	"planVuelo": {
-		"nombre": "vuelo txt",
+		"nombre": "Vuelo asociado al viaje de archivo JSON",
 		"fechaInicio": "2021-01-12",
 		"fechaFin": "2021-01-13",
 		"codigoReserva": "5578",
