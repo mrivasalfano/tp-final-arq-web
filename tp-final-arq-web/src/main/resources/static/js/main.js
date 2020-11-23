@@ -63,12 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.querySelector('.viajes-container__btnCargar').addEventListener('click', r => {
 			importType = 'viaje';
 			document.querySelector('#importType').innerHTML = 'Importar ' + importType;
+			document.querySelector('#sugerencia').innerHTML = 'Sugerencia: Cargar el archivo "viaje-PlanVuelo.txt" ubicado en la carpeta planes_json en la raíz del proyecto';
 			$('#modalViajeCargar').modal('show');
 		});
 
 		document.querySelector('.viajes-container__btnCargarPlan').addEventListener('click', r => {
 			importType = 'plan';
 			document.querySelector('#importType').innerHTML = 'Importar ' + importType;
+			document.querySelector('#sugerencia').innerHTML = 'Sugerencia: Cargar el archivo "plan.txt" o "plan-vuelo.txt" ubicado en la carpeta planes_json en la raíz del proyecto';
 			$('#modalViajeCargar').modal('show');
 		});
 
@@ -365,26 +367,34 @@ document.addEventListener("DOMContentLoaded", () => {
 		}, err => {
 			const data = `
 			<div class="container">
-		        <div class="row h-100">
-		            <div class="col-auto h-100">
+		        <div class="row mt-2">
+		            <div class="col-6 m-auto">
 		                <form action="usuarios/authentication" method="POST">
-		                    <h3 class="text-info">Login</h3>
-		                    <label for="">Usuario</label>
+		                    <h3 class="text-info m-auto">Login</h3>
+		                    <div class="m-auto">
+			                    <label for="">Usuario</label>
 		                    <input type="text" name="usuario" placeholder="ingrese su usuario">
-		                    <label for="">Contraseña</label>
-		                    <input type="password" name="clave" placeholder="Ingrese su contraseña">
+		                    </div>
+		                    <div class="m-auto">
+			                    <label for="">Contraseña</label>
+			                    <input type="password" name="clave" placeholder="Ingrese su contraseña">
+		                    </div>
 		                    <button class="btnLogin" type="submit">Enviar</button>
 		                </form>
-		            </div>
-		           <div class="card">
-		           	  <div class="card-header">
-		           	  	<h5 class="card-title">Usuarios disponibles</h5>
-		           	  </div>
-					  <div class="card-body">
-					    <p class="card-text"><strong>Usuario:</strong> admin <strong>Contraseña:</strong> 1234</p>
-					    <p class="card-text"><strong>Usuario:</strong> manu  <strong>Contraseña:</strong> 1234</p>
-					  </div>
-					</div>
+		           	</div>
+		        </div>
+		        <div class="row mt-5">
+		           <div class="col-6 m-auto">
+			           <div class="card">
+			           	  <div class="card-header">
+			           	  	<h5 class="card-title">Usuarios disponibles</h5>
+			           	  </div>
+						  <div class="card-body">
+						    <p class="card-text"><strong>Usuario:</strong> admin <strong>Contraseña:</strong> 1234</p>
+						    <p class="card-text"><strong>Usuario:</strong> manu  <strong>Contraseña:</strong> 1234</p>
+						  </div>
+					   </div>
+		           </div>
 		        </div>      
 	    	</div>`;
 			renderLogin(data);
