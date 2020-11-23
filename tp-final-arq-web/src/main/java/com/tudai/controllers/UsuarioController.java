@@ -138,7 +138,8 @@ public class UsuarioController extends Controller {
 						.claim("name", usu.getNombre())
 						.signWith(SignatureAlgorithm.HS512, secretKey.getBytes())
 						.compact();
-				resp.put("name", u.getNombre());
+				resp.put("name", usu.getNombre());
+				resp.put("admin", usu.isAdmin());
 				resp.put("token", "Bearer " + token);
 				resp.put("status", "Success");
 			}

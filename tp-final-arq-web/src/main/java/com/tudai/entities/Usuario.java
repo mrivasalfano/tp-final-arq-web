@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Entity
@@ -18,6 +21,7 @@ public class Usuario {
 	@Column
 	private String nombre;
 	@Column
+	@JsonIgnoreProperties(allowSetters = true)
 	private String clave; 
 	@Column
 	private boolean isAdmin;

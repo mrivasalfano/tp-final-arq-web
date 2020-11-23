@@ -132,7 +132,6 @@ public class ViajeController extends Controller {
     
     
     @PostMapping("/")
-    @PreAuthorize("hasAuthority('USER')")
     public Viaje newViaje(@RequestBody Viaje v) {
 		int idUsu = (Integer) SecurityContextHolder.getContext().getAuthentication().getDetails();
 		Optional<Usuario> u = usuRepository.findById(idUsu);

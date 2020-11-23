@@ -3,6 +3,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 	const USUARIO = new Usuario();
 	const CRUDGENERICO = new CRUDGenerico('');
+	let isAdmin;
 	let importType = '';
 	let datosTempPlan = {};
 	let botonesVerMas = [];
@@ -24,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 
 		document.querySelector('.viajes-container__btn').addEventListener('click', r => {
-			mostrarViajes();
+			mostrarViajes().then(() => botonerVerPlanes()).catch((err)=>console.log(err));
 		});
 
 		document.querySelector('.viajes-container__btnId').addEventListener('click', r => {
@@ -34,30 +35,27 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.querySelector('.viaje-container__btnViajeId').addEventListener('click', e => {
 			const input = document.querySelector('.viaje-container__numeroId');
 			if (input.value != '') {
-				CRUDGENERICO.getModularAuthorization('viajes/' + input.value, USUARIO.token).then(resp => {
-					$('#modalViajeId').modal('hide');
-					console.log(resp);
-					if (resp) {
-						renderList(resp);
-					}
-				}, err => {
-					console.log(err);
-				})
+				$('#modalViajeId').modal('hide');
+				mostrarViaje(input.value)
+				.then(() => {
+					botonerVerPlanes();
+				}).catch((err)=>console.log(err));
 			}
 		});
 
 		document.querySelector('.viajes-container__btnReport').addEventListener('click', r => {
-			CRUDGENERICO.getModularAuthorization('viajes/reporte/', USUARIO.token).then(resp => {
-				console.log(resp);
-
-				renderList(resp);
-			}, err => {
-				if (err.status === 403) {
-					document.querySelector('#userStatusContainer').innerHTML = `<p> Usuario sin permisos. </p>`
-					$('#modalUserStatus').modal('show');
-				}
-				console.log(err);
-			})
+			if(isAdmin) {
+				CRUDGENERICO.getModularAuthorization('viajes/reporte/', USUARIO.token).then(resp => {
+					console.log(resp);
+					renderList(resp);
+				}, err => {
+					console.log(err);
+				})
+			}
+			else {
+				document.querySelector('#userStatusContainer').innerHTML = `<p>Debe ser administrador</p>`;
+				$('#modalUserStatus').modal('show');
+			}
 		});
 
 		document.querySelector('.viajes-container__btnCargar').addEventListener('click', r => {
@@ -92,20 +90,13 @@ document.addEventListener("DOMContentLoaded", () => {
 					console.log('Respuesta import bien', resp);
 					input.value = '';
 					$('#modalViajeCargar').modal('hide');
-					mostrarViajes()
-						.then(() => {
-							console.log(resp);
-							botonesVerMas.forEach(btn => {
-								if (btn.getAttribute("data-id") == resp.idViaje) {
-									btn.click();
-								}
-							});
-
-						})
-						.catch((err)=>console.log(err));
+					mostrarViajes().then(() => botonerVerPlanes()).catch((err)=>console.log(err));
 				}, err => {
+					if (err.status === 406) {
+						document.querySelector('#userStatusContainer').innerHTML = `<p>No se encuentra viaje en dicha fecha</p>`;
+						$('#modalUserStatus').modal('show');
+					}
 					console.log(err);
-					alert('Error al importar.');
 				})
 			} else {
 				alert('Debe seleccionar un archivo');
@@ -143,13 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 				}, err => {
-					if (err.status === 403) {
-						document.querySelector('#userStatusContainer').innerHTML = `<p> Usuario sin permisos. </p>`
-						$('#modalUserStatus').modal('show');
-					} else {
 						console.log(err);
-						alert('Error al crear viaje.');
-					}
 				}).finally(() => {
 					document.querySelector('#travelName').value = "";
 					document.querySelector('#travelDescription').value = "";
@@ -178,6 +163,14 @@ document.addEventListener("DOMContentLoaded", () => {
 				console.log(err);
 			})
 		});
+		
+		function botonesVerPlanes() {
+			botonesVerMas.forEach(btn => {
+				if (btn.getAttribute("data-id") == resp.idViaje) {
+					btn.click();
+				}
+			});
+		}
 
 		document.querySelector('.viaje-container__btnViajeCrearPlan').addEventListener('click', r => {
 			const name = document.querySelector('#travelDescription2').value;
@@ -224,16 +217,10 @@ document.addEventListener("DOMContentLoaded", () => {
 				CRUDGENERICO.postModularAuthorization(ruta, data, USUARIO.token).then(resp => {
 					console.log(resp);
 					$('#modalViajeCrearPlan').modal('hide');
-					mostrarViajes();
+					mostrarViajes().then(() => botonerVerPlanes()).catch((err)=>console.log(err));
 
 				}, err => {
-					if (err.status === 403) {
-						document.querySelector('#userStatusContainer').innerHTML = `<p> Admin sin permisos. </p>`
-						$('#modalUserStatus').modal('show');
-					} else {
-						//console.log(err);
-						alert('Error al crear viaje.');
-					}
+					console.log(err);
 				}).finally(() => {
 					document.querySelector('#travelDescription2').value = "";
 					document.querySelector('#selectViajes').value = "";
@@ -292,7 +279,15 @@ document.addEventListener("DOMContentLoaded", () => {
 			template += `<tr>`;
 			for (let e = 0; e < keys.length; e++) {
 				const key = keys[e];
-				template += ` <td>${data[key]}</td>`;
+				
+				if (key === "planes") {
+					datosTempPlan[data.id] = data.planes;
+					template += `<td><button class="btn btn-success verMasPlanes" data-id="${data.id}">Ver más</button></td>`;
+				} else if (key === "usuario") {
+					template += ` <td>${data[key].nombre}</td>`;
+				} else {
+					template += ` <td>${data[key]}</td>`;
+				}
 			}
 			template += `</tr>`;
 		}
@@ -345,6 +340,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			USUARIO.postModular("authentication/", data).then(resp => {
 				if (resp.status === "Success") {
 					USUARIO.token = resp.token;
+					isAdmin = resp.admin;
+					console.log(isAdmin);
+					console.log(resp);
 					sessionStorage.setItem("token", USUARIO.token);
 					//console.log(data.nombre);
 
@@ -383,16 +381,28 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 
-	function mostrarViajes() {
+	function mostrarViaje(id) {
 		return new Promise((resolve, reject) => {
-			CRUDGENERICO.getModularAuthorization('viajes/', USUARIO.token).then(resp => {
+			CRUDGENERICO.getModularAuthorization('viajes/'+id+'/', USUARIO.token).then(resp => {
+				document.querySelector('.planes').innerHTML = '';
 				renderList(resp);
 				resolve();
 			}, err => {
 				reject(err);
 			})
 		})
+	}
 
+	function mostrarViajes() {
+		return new Promise((resolve, reject) => {
+			CRUDGENERICO.getModularAuthorization('viajes/', USUARIO.token).then(resp => {
+				document.querySelector('.planes').innerHTML = '';
+				renderList(resp);
+				resolve();
+			}, err => {
+				reject(err);
+			})
+		})
 	}
 
 });

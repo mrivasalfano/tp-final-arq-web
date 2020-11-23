@@ -119,7 +119,6 @@ public class PlanController extends Controller {
 	}
 
 	@PostMapping("/")
-	@PreAuthorize("hasAuthority('USER')")
 	public Plan newPlan(@RequestBody Plan p) {
 		Optional<Viaje> v = vrepository.findById(p.getIdViaje());
 		
@@ -132,7 +131,6 @@ public class PlanController extends Controller {
 	}
 
 	@PostMapping("/vuelos")
-	@PreAuthorize("hasAuthority('USER')")
 	public Plan newPlanVuelo(@RequestBody PlanVuelo pv) {
 		Optional<Viaje> v = vrepository.findById(pv.getIdViaje());
 		
