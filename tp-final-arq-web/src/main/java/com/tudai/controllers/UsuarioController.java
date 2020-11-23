@@ -2,6 +2,7 @@ package com.tudai.controllers;
 
 import java.sql.Date;
 import java.time.Instant;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tudai.entities.Usuario;
 import com.tudai.repositories.UsuarioRepository;
+import com.tudai.utils.UsuarioDTO;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -52,8 +55,11 @@ public class UsuarioController extends Controller {
     }
     
     @GetMapping("/")
-    public Iterable<Usuario> getUsuario() {
-    	return repository.findAll();
+    public List<UsuarioDTO> getUsuario() {
+    	List<Usuario> usuarios = repository.findAll();
+    	List<UsuarioDTO> usuariosReturn = new LinkedList<>();
+    	usuarios.forEach(u -> usuariosReturn.add(new UsuarioDTO(u.getId(), u.getNombre())));
+    	return usuariosReturn;
     }
     
     @GetMapping("/{id}")
@@ -62,12 +68,16 @@ public class UsuarioController extends Controller {
     }
         
     @PostMapping("/")
-    public Usuario newUsuario(@RequestBody Usuario u) {
+    public Usuario newUsuario(@RequestBody Usuario u, HttpServletResponse response) {
     	Usuario usu = repository.findByName(u.getNombre());
+    	
     	if(usu != null) {
-    		return null;
+    		this.responseStatus(400,response);
     	}
+    	
     	u.setClave(this.passwordEncoder.encode(u.getClave()));
+    	u.setAdmin(false);
+    	
     	return repository.save(u);    		
     }
     

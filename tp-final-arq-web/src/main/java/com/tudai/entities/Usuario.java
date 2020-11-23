@@ -36,6 +36,11 @@ public class Usuario {
 		this.isAdmin = false;
 	}
 	
+	public Usuario(int id, String nombre){
+		this.id = id;
+		this.nombre = nombre;
+	}
+	
 	public void makeAdmin() {
 		this.isAdmin = true;
 	}
